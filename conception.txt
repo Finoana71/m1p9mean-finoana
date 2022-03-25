@@ -1,0 +1,41 @@
+categorie: {
+	id: 
+	nom:
+}
+
+
+plat:{
+	id: ,
+	prixAchat: number,
+	prixVente: number,
+	nom: string,
+	description: 
+	categoryId:
+}
+
+restaurant: {
+	id
+	nom
+}
+
+commande: {
+	id:
+	date:
+	status:
+	plats: [
+		{
+			prixAchat
+			prixVente
+			quantite
+			nom
+		}
+	]
+}
+
+
+livreur: {
+	id
+	nom
+	commandeLivrees: [
+	commandeEnCours: [
+}
