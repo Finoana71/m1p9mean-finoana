@@ -4,24 +4,37 @@ categorie: {
 }
 
 
+restaurant: {
+	id
+	nom
+}
+
 plat:{
 	id: ,
 	prixAchat: number,
 	prixVente: number,
 	nom: string,
 	description: 
-	categoryId:
+	categorie:
+	restaurantId:
 }
 
-restaurant: {
-	id
-	nom
+utilisateur: {
+	id,
+	nom,
+	email,
+	motDePasse,
+	type:
+	idRestaurant
 }
 
 commande: {
 	id:
+	idUtilisateur
 	date:
 	status:
+	idRestaurant:
+	idLivreur:
 	plats: [
 		{
 			prixAchat
@@ -30,12 +43,8 @@ commande: {
 			nom
 		}
 	]
+	prixAchat,
+	prixVente
 }
 
 
-livreur: {
-	id
-	nom
-	commandeLivrees: [
-	commandeEnCours: [
-}
