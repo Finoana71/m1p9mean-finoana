@@ -8,7 +8,6 @@ restaurant: {
 	id
 	nom
 }
-
 plat:{
 	id: ,
 	prixAchat: number,
@@ -23,11 +22,11 @@ utilisateur: {
 	id,
 	nom,
 	email,
+	activated,
 	motDePasse,
 	type:
 	idRestaurant
 }
-
 commande: {
 	id:
 	idUtilisateur
