@@ -10,6 +10,10 @@ var express = require("express")
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// JWt token
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
+
 dbo.connectToServer(function (err) {
   if (err) {
     console.error(err);
@@ -28,10 +32,10 @@ dbo.connectToServer(function (err) {
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, 'public')));
 
-        // view engine setup
-        app.set('views', path.join(__dirname, 'views'));
-        app.set('view engine', 'jade');
-    
+    // view engine setup
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'jade');
+
 
     // Ajouter des routeurs
     var indexRouter = require('./src/routes/index');
@@ -39,7 +43,10 @@ dbo.connectToServer(function (err) {
 
     // Utiliser les routeurs
     app.use('/api/', indexRouter);
-    app.use('/api/users', usersRouter);
+    app.use('/api/utilisateurs', usersRouter);
+
+    let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
+    app.use(expressJwt({secret: 'ekalySecret', algorithms: ["RS256"]}).unless({path: pathNoToken}));
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
@@ -54,7 +61,7 @@ dbo.connectToServer(function (err) {
 
         // render the error page
         res.status(err.status || 500);
-        res.render('error');
+        res.send({message: err.message})
     });
 
     app.use(express.static('public'));
