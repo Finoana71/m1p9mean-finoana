@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "ng build --prod"
+
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

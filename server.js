@@ -1,7 +1,14 @@
-const app = require('./app');
+const express = require('express');
+const path = require('path');
+const app = express();
 
-const PORT = process.env.PORT || 8080
-const dbo = require("./configs/db");
+app.use(express.static(__dirname + '/dist/<app-name>'));
+
+app.get('/*', function(req,res) {
+	res.sendFile(path.join(__dirname+ '/dist/<app-name>/index.html'));
+});
+
+//const dbo = require("./configs/db");
 const bodyParser = require("body-parser")
 
 var createError = require('http-errors');
@@ -38,11 +45,11 @@ const expressJwt = require('express-jwt');
 
 
     // // Ajouter des routeurs
-    // var indexRouter = require('./src/routes/index');
+     var indexRouter = require('./backend/src/routes/index');
     // var usersRouter = require('./src/routes/users');
 
     // // Utiliser les routeurs
-    // app.use('/api/', indexRouter);
+     app.use('/api/', indexRouter);
     // app.use('/api/utilisateurs', usersRouter);
 
     let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
@@ -65,13 +72,10 @@ const expressJwt = require('express-jwt');
     });
 
     app.use(express.static('public'));
-    app.get('*',(req,res)=>{
-        res.sendFile(path.join(__dirname,'public/index.html'));
-    })
 
   // start the Express server
-  app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
-  });
 // });
 
+
+
+app.listen(process.env.PORT || 8080);
