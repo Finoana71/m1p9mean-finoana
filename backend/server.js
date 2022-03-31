@@ -14,6 +14,11 @@ var logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
+    app.use(express.static('public'));
+    app.get('/',(req,res)=>{
+        res.sendFile(path.join(__dirname,'public/index.html'));
+    })
+
 // dbo.connectToServer(function (err) {
 //   if (err) {
 //     console.error(err);
@@ -38,11 +43,11 @@ const expressJwt = require('express-jwt');
 
 
     // // Ajouter des routeurs
-    // var indexRouter = require('./src/routes/index');
+     var indexRouter = require('./src/routes/index');
     // var usersRouter = require('./src/routes/users');
 
     // // Utiliser les routeurs
-    // app.use('/api/', indexRouter);
+     app.use('/api/', indexRouter);
     // app.use('/api/utilisateurs', usersRouter);
 
     let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
@@ -63,11 +68,6 @@ const expressJwt = require('express-jwt');
         res.status(err.status || 500);
         res.send({message: err.message})
     });
-
-    app.use(express.static('public'));
-    app.get('*',(req,res)=>{
-        res.sendFile(path.join(__dirname,'public/index.html'));
-    })
 
   // start the Express server
   app.listen(PORT, () => {
