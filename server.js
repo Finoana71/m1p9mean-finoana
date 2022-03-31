@@ -4,10 +4,6 @@ const app = express();
 
 app.use(express.static(__dirname + '/dist/'));
 
-app.get('/*', function(req,res) {
-	res.sendFile(path.join(__dirname+ '/dist/index.html'));
-});
-
 //const dbo = require("./configs/db");
 const bodyParser = require("body-parser")
 
@@ -38,16 +34,20 @@ const expressJwt = require('express-jwt');
     //app.use(express.static(path.join(__dirname, 'public')));
 
     // // view engine setup
-    // app.set('views', path.join(__dirname, 'views'));
-    // app.set('view engine', 'jade');
+     app.set('views', path.join(__dirname, 'backend/views'));
+     app.set('view engine', 'jade');
 
 
     // // Ajouter des routeurs
-    // var indexRouter = require('./src/routes/index');
+     var indexRouter = require('./backend/src/routes/index');
     // var usersRouter = require('./src/routes/users');
 
     // // Utiliser les routeurs
-     //app.use('/api/', indexRouter);
+     app.use('/api/', indexRouter);
+	app.get('/*', function(req,res) {
+		res.sendFile(path.join(__dirname+ '/dist/index.html'));
+	});
+
     // app.use('/api/utilisateurs', usersRouter);
 
     //let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
