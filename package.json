@@ -11,7 +11,7 @@
   },
   "scripts": {
     "heroku-postbuild": "ng build --prod",
-	"ng": "ng",
+    "ng": "ng",
     "conventional-changelog": "conventional-changelog",
     "start": "ng serve",
     "build": "ng build",
@@ -31,13 +31,13 @@
     "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points --tsconfig \"./src/tsconfig.app.json\""
   },
   "dependencies": {
-    "@angular/cli": "^12.1.0",
-    "@angular/compiler-cli": "^12.1.0",
     "@akveo/ng2-completer": "^9.0.1",
     "@angular/animations": "^12.1.0",
     "@angular/cdk": "12.1.0",
+    "@angular/cli": "^12.1.0",
     "@angular/common": "^12.1.0",
     "@angular/compiler": "^12.1.0",
+    "@angular/compiler-cli": "^12.1.0",
     "@angular/core": "^12.1.0",
     "@angular/forms": "^12.1.0",
     "@angular/google-maps": "^12.1.0",
@@ -87,7 +87,7 @@
     "tinymce": "4.5.7",
     "tslib": "^2.1.0",
     "typeface-exo": "0.0.22",
-	"typescript": "^4.2.3",
+    "typescript": "^4.2.3",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.11.4"
   },
@@ -123,5 +123,8 @@
     "tslint-language-service": "^0.9.9",
     "typescript": "^4.2.3"
   },
-  "engines": { "node": "14.17.4", "npm": "6.14.14" }
+  "engines": {
+    "node": "14.17.4",
+    "npm": "6.14.14"
+  }
 }
