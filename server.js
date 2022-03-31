@@ -2,18 +2,16 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-app.use(express.static(__dirname + '/dist/<app-name>'));
+app.use(express.static(__dirname + '/dist/'));
 
 app.get('/*', function(req,res) {
-	res.sendFile(path.join(__dirname+ '/dist/<app-name>/index.html'));
+	res.sendFile(path.join(__dirname+ '/dist/index.html'));
 });
 
 //const dbo = require("./configs/db");
 const bodyParser = require("body-parser")
 
 var createError = require('http-errors');
-var path = require('path');
-var express = require("express") 
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 

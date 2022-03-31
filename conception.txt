@@ -47,3 +47,4 @@ commande: {
 }
 
 
+    "heroku-postbuild": "ng build --prod",
