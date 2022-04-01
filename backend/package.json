@@ -5,7 +5,6 @@
   "scripts": {
     "start": "node server.js",
     "heroku-postbuild": "ng build --prod"
-
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
