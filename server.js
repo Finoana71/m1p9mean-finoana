@@ -5,15 +5,15 @@ const app = express();
 app.use(express.static(__dirname + '/dist/'));
 
 //const dbo = require("./configs/db");
-const bodyParser = require("body-parser")
+//const bodyParser = require("body-parser")
 
-var createError = require('http-errors');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+//var createError = require('http-errors');
+//var cookieParser = require('cookie-parser');
+//var logger = require('morgan');
 
 // JWt token
-const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
+//const jwt = require('jsonwebtoken');
+//const expressJwt = require('express-jwt');
 
 // dbo.connectToServer(function (err) {
 //   if (err) {
@@ -34,16 +34,16 @@ const expressJwt = require('express-jwt');
     //app.use(express.static(path.join(__dirname, 'public')));
 
     // // view engine setup
-     app.set('views', path.join(__dirname, 'backend/views'));
-     app.set('view engine', 'jade');
+//     app.set('views', path.join(__dirname, 'backend/views'));
+//     app.set('view engine', 'jade');
 
 
     // // Ajouter des routeurs
-     var indexRouter = require('./backend/src/routes/index');
+     //var indexRouter = require('./backend/src/routes/index');
     // var usersRouter = require('./src/routes/users');
 
     // // Utiliser les routeurs
-     app.use('/api/', indexRouter);
+     //app.use('/api/', indexRouter);
 	app.get('/*', function(req,res) {
 		res.sendFile(path.join(__dirname+ '/dist/index.html'));
 	});
