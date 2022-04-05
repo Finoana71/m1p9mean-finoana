@@ -19,12 +19,20 @@ export class AuthService {
 
   login(user){
     const onSuccess = (response) =>{
-
+      localStorage.setItem("user", JSON.stringify(response));
+      this.router.navigateByUrl("");
+      window.location.reload();
     }
-    
+    let url = apiUrl + "/users/connexion";
+    this.http.post(url, user).subscribe(onSuccess, this.onError);
   }
   
   inscription(user){
-    this.notif.error("Test login")
+    const onSuccess = (response) =>{
+      this.notif.success("Veuillez vérifier votre mail pour valider l'inscription");
+    }
+    let url = apiUrl + "/users/inscription";
+    this.http.post(url, user).subscribe(onSuccess, this.onError);
+
   }
 }
