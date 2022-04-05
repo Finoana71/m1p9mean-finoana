@@ -1,0 +1,85 @@
+<h1 id="title" class="title">S'inscrire</h1>
+<p class="sub-title">Bienvenue dans E-Kaly</p>
+
+<form (ngSubmit)="inscription()" #form="ngForm" aria-labelledby="title">
+
+    <div class="form-control-group">
+        <label class="label" for="input-nom">Nom</label>
+        <input nbInput
+               fullWidth
+               [(ngModel)]="user.nom"
+               #email="ngModel"
+               name="nom"
+               id="input-nom"
+               pattern=".+@.+\..+"
+               placeholder="Votre nom"
+               fieldSize="large"
+               autofocus
+               class="form-control form-control-sm"/>
+        <ng-container *ngIf="forms.email.errors">
+          <p class="caption status-danger" *ngIf="forms.nom.errors?.required">
+            Veuillez renseigner un nom
+          </p>
+        </ng-container>
+    </div>
+    
+  <div class="form-control-group">
+    <label class="label" for="input-email">Email</label>
+    <input nbInput
+           fullWidth
+           [(ngModel)]="user.email"
+           #email="ngModel"
+           name="email"
+           id="input-email"
+           pattern=".+@.+\..+"
+           placeholder="Adresse email"
+           fieldSize="large"
+           autofocus
+           class="form-control form-control-sm"/>
+    <ng-container *ngIf="forms.email.errors">
+      <p class="caption status-danger" *ngIf="forms.email.errors?.required">
+        Veuillez renseigner un email
+      </p>
+      <p class="caption status-danger" *ngIf="forms.email.errors?.email">
+        Veuillez renseigner un email valide
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <span class="label-with-link">
+      <label class="label" for="input-password">Mot de passe:</label>
+    </span>
+    <input nbInput
+           fullWidth
+           [(ngModel)]="user.motDePasse"
+           name="motDePasse"
+           type="motDePasse"
+           id="input-password"
+           placeholder="Mot de passe"
+           fieldSize="large"
+           class="form-control form-control-sm"/>
+    <ng-container *ngIf="forms.motDePasse.errors">
+      <p class="caption status-danger" *ngIf="forms.motDePasse.errors?.required">
+        Veuillez renseigner le mot de passe
+      </p>
+      <p class="caption status-danger" *ngIf="forms.motDePasse.errors?.minlength || forms.motDePasse.errors?.maxlength">
+        Le mot de passe doit avoir 8 caractères minimum
+      </p>
+    </ng-container>
+  </div>
+
+  <button nbButton
+          fullWidth
+          status="primary"
+          size="large"
+          [disabled]="submitted || !form.valid"
+          [class.btn-pulse]="submitted"
+          class="btn btn-outline-success mx-auto db-block form-control">
+    S'inscrire
+  </button>
+</form>
+
+<section class="another-action" aria-label="Register">
+  Vous n'avez pas encore de compte? <a class="text-link" routerLink="../login">Se connecter</a>
+</section>

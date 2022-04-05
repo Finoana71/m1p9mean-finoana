@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -20,9 +21,11 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { LoginComponent } from './auth/login/login.component';
+import { InscriptionComponent } from './auth/inscription/inscription.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent, InscriptionComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -39,6 +42,8 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent],
 })

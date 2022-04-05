@@ -1,3 +1,5 @@
+import { InscriptionComponent } from './auth/inscription/inscription.component';
+import { LoginComponent } from './auth/login/login.component';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import {
@@ -14,22 +16,22 @@ export const routes: Routes = [
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
-  },
+  },  
   {
     path: 'auth',
     component: NbAuthComponent,
     children: [
       {
         path: '',
-        component: NbLoginComponent,
+        component: LoginComponent,
       },
       {
         path: 'login',
-        component: NbLoginComponent,
+        component: LoginComponent,
       },
       {
-        path: 'register',
-        component: NbRegisterComponent,
+        path: 'inscription',
+        component: InscriptionComponent,
       },
       {
         path: 'logout',
