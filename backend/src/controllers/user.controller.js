@@ -24,7 +24,20 @@ const connexion = async (req, res) =>{
     }
 }
 
+const activer = async (req, res) =>{
+    try{
+        let token = req.query.token;
+        await userServ.activerToken(token);
+        res.send("Votre compte est activé")
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send({message: err.message})
+    }
+}
+
 module.exports = {
     inscription,
-    connexion
+    connexion,
+    activer
 }

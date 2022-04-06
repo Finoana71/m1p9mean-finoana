@@ -1,4 +1,4 @@
-//const app = require('./app');
+const app = require('./app');
 
 const PORT = process.env.PORT || 8080
 const dbo = require("./configs/db");
@@ -19,11 +19,11 @@ const expressJwt = require('express-jwt');
         res.sendFile(path.join(__dirname,'public/index.html'));
     })
 
-// dbo.connectToServer(function (err) {
-//   if (err) {
-//     console.error(err);
-//     process.exit();
-//   }
+dbo.connectToServer(function (err) {
+  if (err) {
+    console.error(err);
+    process.exit();
+  }
   
     // Make sure you place body-parser before your CRUD handlers
     app.use(bodyParser.urlencoded({extended: true}))
@@ -35,7 +35,7 @@ const expressJwt = require('express-jwt');
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
-    app.use(express.static(path.join(__dirname, 'public')));
+    // app.use(express.static(path.join(__dirname, 'public')));
 
     // // view engine setup
     // app.set('views', path.join(__dirname, 'views'));
@@ -44,11 +44,11 @@ const expressJwt = require('express-jwt');
 
     // // Ajouter des routeurs
      var indexRouter = require('./src/routes/index');
-    // var usersRouter = require('./src/routes/users');
+    var usersRouter = require('./src/routes/users');
 
     // // Utiliser les routeurs
      app.use('/api/', indexRouter);
-    // app.use('/api/utilisateurs', usersRouter);
+    app.use('/api/utilisateurs', usersRouter);
 
     let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
     app.use(expressJwt({secret: 'ekalySecret', algorithms: ["RS256"]}).unless({path: pathNoToken}));
@@ -73,5 +73,5 @@ const expressJwt = require('express-jwt');
   app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
   });
-// });
+});
 

@@ -15,6 +15,11 @@ var logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
+app.use(express.static('backend/public'));
+app.get('/',(req,res)=>{
+    res.sendFile(path.join(__dirname,'backend/public/index.html'));
+})
+
 dbo.connectToServer(function (err) {
   if (err) {
     console.error(err);
@@ -31,7 +36,7 @@ dbo.connectToServer(function (err) {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
-    //app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'public')));
 
     // // view engine setup
     app.set('views', path.join(__dirname, 'backend/views'));
@@ -46,13 +51,13 @@ dbo.connectToServer(function (err) {
     app.use('/api/', indexRouter);
     app.use('/api/utilisateurs', usersRouter);
 
-	app.get('/*', function(req,res) {
-		res.sendFile(path.join(__dirname+ '/dist/index.html'));
-	});
+	// app.get('/*', function(req,res) {
+	// 	res.sendFile(path.join(__dirname+ '/dist/index.html'));
+	// });
 
 
-    //let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
-    //app.use(expressJwt({secret: 'ekalySecret', algorithms: ["RS256"]}).unless({path: pathNoToken}));
+    // let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
+    // app.use(expressJwt({secret: 'ekalySecret', algorithms: ["RS256"]}).unless({path: pathNoToken}));
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
@@ -71,10 +76,10 @@ dbo.connectToServer(function (err) {
     });
 
     //app.use(express.static('public'));
+    app.listen(process.env.PORT || 8080);
 
   // start the Express server
 });
 
 
 
-app.listen(process.env.PORT || 8080);

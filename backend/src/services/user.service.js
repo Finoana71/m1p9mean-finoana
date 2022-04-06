@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 let Handlebars = require("handlebars");
 let fs = require("fs");
 const emailService = require("./mail.service")
+var path = require('path');
 
 const baseUrl = require("../../configs/environment").baseUrl;
 
@@ -14,7 +15,7 @@ const baseUrl = require("../../configs/environment").baseUrl;
 
 async function envoyerLienActivation(email, token){
     let subject = "Lien d'activation de compte E-Kaly";
-    let source =  fs.readFileSync("views/activation.html", "utf8");
+    let source =  fs.readFileSync(path.join(__dirname,"activation.html"), "utf8");
     let template = Handlebars.compile(source);
     let url = baseUrl + "/activerClient?token=" + token;
     let htmlContent = template({ lien: url});
@@ -28,9 +29,10 @@ async function inscrire(req){
     validerRequeteInscription(req.body);
     await verifierMailUtilise(req.body.email);
     let client = genererClientReq(req);
-    await User.insert(client).then(async(data) => {
+    await User.insert(client, {fullResult: true}).then(async(data) => {
         let token = bcrypt.hashSync(client.nom, 8);
-        // TokenActivation.insert({token: token})
+        console.log(data);
+        TokenActivation.insert({token: token, userId: data.insertedIds["0"]})
         await envoyerLienActivation(client.email, token);
     });
     return client;
@@ -91,8 +93,13 @@ async function getUtilisateurByEmail(email){
     return users;
 }
 
+async function activerToken(token){
+    let tokenActivation = await TokenActivation.findOne({token: token});
+    await User.update({_id: tokenActivation.userId}, {$set: {active: true}});
+}
 
 module.exports = {
     inscrire,
-    login
+    login,
+    activerToken
 }
