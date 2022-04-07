@@ -36,8 +36,21 @@ const activer = async (req, res) =>{
     }
 }
 
+const nouveau = async (req, res) =>{
+    try{
+        // let token = req.query.token;
+        await userServ.nouveau(req);
+        res.send(helper.makeDataApi(null, 200, "Utilisateur enregistré avec succès"));
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send({message: err.message})
+    }
+}
+
 module.exports = {
     inscription,
     connexion,
-    activer
+    activer,
+    nouveau
 }

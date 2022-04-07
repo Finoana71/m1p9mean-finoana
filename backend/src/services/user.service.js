@@ -54,7 +54,7 @@ async function login(req){
     if(users.length == 0)
         throw new Error("Cet email n'est pas inscrit")
     testLogin(req.body.motDePasse, users[0]);
-    var token = jwt.sign({userID: users[0].id}, 'ekalySecret', {expiresIn: '2h'});
+    var token = jwt.sign({id: users[0]._id}, 'ekalySecret', {expiresIn: '2h'});
     users[0].token = token;
     return users[0];
 }
@@ -82,6 +82,28 @@ function genererClientReq(req){
     return client;
 }
 
+function verifierType(req){
+    if(!req.body.type)
+        throw new Error("Veuillez spécifier le type de l'utilisateur");
+    if(req.body.type!='Ekaly'&&req.body.type!='Restaurant')
+        throw new Error("Type de l'utilisateur non valide");
+    if(!req.body.restaurantId&&req.body.type=='Restaurant')
+        throw new Error("Veuillez spécifier le restaurant");
+}
+
+function genererUtilisateur(req){
+    let client = {};
+    verifierType(req);
+    client.email = req.body.email;
+    client.nom = req.body.nom;
+    client.motDePasse = bcrypt.hashSync(req.body.motDePasse, 8);
+    client.type = req.body.type;
+    if(req.body.type == 'Restaurant')
+    client.restaurantId = req.body.restaurantId;
+    client.active = true;
+    return client;
+}
+
 async function verifierMailUtilise(email){
     let users = await getUtilisateurByEmail(email);
     console.log(users);
@@ -95,11 +117,29 @@ async function getUtilisateurByEmail(email){
 
 async function activerToken(token){
     let tokenActivation = await TokenActivation.findOne({token: token});
-    await User.update({_id: tokenActivation.userId}, {$set: {active: true}});
+    if(!tokenActivation) throw new Error("Le lien n'est pas valide")
+    let user = await User.findOne({_id: tokenActivation.userId});
+    if(user.active) throw new Error("Le lien n'est pas valide")
+    await User.update({_id: tokenActivation.userId}, {$set: {active: true}}).then(
+        (data) => {
+            TokenActivation.remove({token: token});
+        }
+    );
 }
 
+
+// Se connecter
+async function nouveau(req){
+    validerRequeteLogin(req.body);
+    let users = await getUtilisateurByEmail(req.body.email);
+    if(users.length != 0)
+        throw new Error("Cet email est deja utilisé")
+    let user = genererUtilisateur(req);
+    await User.insert(user);
+}
 module.exports = {
     inscrire,
     login,
-    activerToken
+    activerToken,
+    nouveau
 }

@@ -46,12 +46,12 @@ dbo.connectToServer(function (err) {
      var indexRouter = require('./src/routes/index');
     var usersRouter = require('./src/routes/users');
 
-    // // Utiliser les routeurs
-     app.use('/api/', indexRouter);
-    app.use('/api/utilisateurs', usersRouter);
-
     let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
     app.use(expressJwt({secret: 'ekalySecret', algorithms: ["RS256"]}).unless({path: pathNoToken}));
+
+    // // Utiliser les routeurs
+    app.use('/api/', indexRouter);
+    app.use('/api/utilisateurs', usersRouter);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
