@@ -8,8 +8,8 @@ const authMiddle = require("../middlewares/auth.middleware");
 console.log(authMiddle.isAdmin)
 router.post('/inscription', controller.inscription);
 router.post('/connexion', controller.connexion);
-router.post('/activer', controller.activer);
-router.post('/nouveau', [authMiddle.verifyToken, authMiddle.isAdmin], controller.nouveau);
+router.put('/activer', controller.activer);
+router.post('/', [authMiddle.verifyToken, authMiddle.isAdmin], controller.nouveau);
 
 // router.post('/nouveau', function(req, res, next) {
   
