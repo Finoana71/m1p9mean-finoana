@@ -85,7 +85,7 @@ function genererClientReq(req){
 function verifierType(req){
     if(!req.body.type)
         throw new Error("Veuillez spécifier le type de l'utilisateur");
-    if(req.body.type!='Ekaly'&&req.body.type!='Restaurant')
+    if(req.body.type!='Ekaly'&&req.body.type!='Restaurant'&&req.body.type!='Livreur')
         throw new Error("Type de l'utilisateur non valide");
     if(!req.body.restaurantId&&req.body.type=='Restaurant')
         throw new Error("Veuillez spécifier le restaurant");
