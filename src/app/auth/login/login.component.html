@@ -1,26 +1,24 @@
 <h1 id="title" class="title">Se connecter</h1>
 <p class="sub-title">Bienvenue dans E-Kaly</p>
 
-<form (ngSubmit)="login()" #form="ngForm" aria-labelledby="title">
+<form (ngSubmit)="login()" [formGroup]="formGroup" aria-labelledby="title">
 
   <div class="form-control-group">
     <label class="label" for="input-email">Email</label>
     <input nbInput
            fullWidth
            [(ngModel)]="user.email"
-           #email="ngModel"
-           name="email"
-           id="input-email"
+           formControlName="user.email"
            pattern=".+@.+\..+"
-           placeholder="Email address"
+           placeholder="Adresse email"
            fieldSize="large"
            autofocus
            class="form-control form-control-sm"/>
-    <ng-container *ngIf="forms.email.errors">
-      <p class="caption status-danger" *ngIf="forms.email.errors?.required">
+    <ng-container *ngIf="forms['user.email'].errors&&submitted">
+      <p class="caption status-danger" *ngIf="forms['user.email'].errors?.required">
         Veuillez renseigner un email
       </p>
-      <p class="caption status-danger" *ngIf="forms.email.errors?.email">
+      <p class="caption status-danger" *ngIf="forms['user.email'].errors?.email">
         Veuillez renseigner un email valide
       </p>
     </ng-container>
@@ -33,18 +31,14 @@
     <input nbInput
            fullWidth
            [(ngModel)]="user.motDePasse"
-           name="motDePasse"
-           type="motDePasse"
+           formControlName="user.motDePasse"
            id="input-password"
            placeholder="Mot de passe"
            fieldSize="large"
            class="form-control form-control-sm"/>
-    <ng-container *ngIf="forms.motDePasse.errors">
-      <p class="caption status-danger" *ngIf="forms.motDePasse.errors?.required">
+    <ng-container *ngIf="forms['user.motDePasse'].errors&&submitted">
+      <p class="caption status-danger" *ngIf="forms['user.motDePasse'].errors.required">
         Veuillez renseigner le mot de passe
-      </p>
-      <p class="caption status-danger" *ngIf="forms.motDePasse.errors?.minlength || forms.motDePasse.errors?.maxlength">
-        Le mot de passe doit avoir 8 caractères minimum
       </p>
     </ng-container>
   </div>
@@ -53,9 +47,6 @@
           fullWidth
           status="primary"
           size="large"
-          [disabled]="submitted || !form.valid"
-          [class.btn-pulse]="submitted"
-          Se connecter
           class="btn btn-outline-success form-control">
           Se connecter
   </button>

@@ -42,7 +42,8 @@ import { AuthService } from '../../services/auth/auth.service';
 
      login(): void{
       this.submitted =  true;
-      console.log("llogin")
+      if(this.formGroup.invalid)
+        return;
       this.service.login(this.user);
      };
 
@@ -53,8 +54,8 @@ import { AuthService } from '../../services/auth/auth.service';
 
      buildForm(){
        this.formGroup = this.formBuilder.group({
-         email: [this.user.email, [Validators.required, Validators.email]],
-         motDePasse: [this.user.motDePasse, Validators.required],
+         "user.email": [this.user.email, [Validators.required, Validators.email]],
+         "user.motDePasse": [this.user.motDePasse, Validators.required],
        })
      }
 

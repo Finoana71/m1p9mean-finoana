@@ -7,8 +7,7 @@ const inscription = async (req, res) =>{
         res.send(helper.makeDataApi(client));
     }
     catch(err){
-        console.log(err);
-        res.status(500).send({message: err.message})
+        helper.gererErreur(err, res)
     }
 }
 
@@ -19,8 +18,7 @@ const connexion = async (req, res) =>{
         res.send(helper.makeDataApi(client));
     }
     catch(err){
-        console.log(err);
-        res.status(500).send({message: err.message})
+        helper.gererErreur(err, res)
     }
 }
 
@@ -31,8 +29,7 @@ const activer = async (req, res) =>{
         res.send("Votre compte est activé")
     }
     catch(err){
-        console.log(err);
-        res.status(500).send({message: err.message})
+        helper.gererErreur(err, res)
     }
 }
 
@@ -43,8 +40,7 @@ const nouveau = async (req, res) =>{
         res.send(helper.makeDataApi(null, 200, "Utilisateur enregistré avec succès"));
     }
     catch(err){
-        console.log(err);
-        res.status(500).send({message: err.message})
+        helper.gererErreur(err, res)
     }
 }
 

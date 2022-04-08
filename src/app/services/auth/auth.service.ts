@@ -14,16 +14,19 @@ export class AuthService {
   constructor(private notif: NotifService, private router: Router, private http: HttpClient) { }
 
   onError = (err) =>{
-    this.notif.error(err);
+    if(err.status == 404)
+      this.notif.error("Il y a une erreur au serveur");
+    else
+    this.notif.error(err.error.message);
   }
 
   login(user){
     const onSuccess = (response) =>{
-      localStorage.setItem("user", JSON.stringify(response));
-      this.router.navigateByUrl("");
-      window.location.reload();
+      // localStorage.setItem("user", JSON.stringify(response.data));
+      this.router.navigate(["/dashboard"]);
+      // window.location.reload();
     }
-    let url = apiUrl + "/users/connexion";
+    let url = apiUrl + "/utilisateurs/connexion";
     this.http.post(url, user).subscribe(onSuccess, this.onError);
   }
   
@@ -31,8 +34,16 @@ export class AuthService {
     const onSuccess = (response) =>{
       this.notif.success("Veuillez vérifier votre mail pour valider l'inscription");
     }
-    let url = apiUrl + "/users/inscription";
+    let url = apiUrl + "/utilisateurs/inscription";
     this.http.post(url, user).subscribe(onSuccess, this.onError);
+  }
 
+  getUser(){
+    return JSON.parse(localStorage.getItem("user"));
+  }
+
+  logout(){
+    localStorage.removeItem("user");
+    this.router.navigateByUrl("/auth");
   }
 }

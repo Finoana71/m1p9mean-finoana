@@ -15,6 +15,14 @@ var logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
+// Cors
+const cors = require("cors");
+
+var corsOptions = {
+  origin: ["http://localhost:4200"]
+};
+
+app.use(cors(corsOptions));
 app.use(express.static('backend/public'));
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,'backend/public/index.html'));

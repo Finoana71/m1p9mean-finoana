@@ -23,6 +23,7 @@ import {
 } from '@nebular/theme';
 import { LoginComponent } from './auth/login/login.component';
 import { InscriptionComponent } from './auth/inscription/inscription.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, InscriptionComponent],
@@ -43,7 +44,8 @@ import { InscriptionComponent } from './auth/inscription/inscription.component';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({})
   ],
   bootstrap: [AppComponent],
 })

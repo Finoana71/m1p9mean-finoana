@@ -32,7 +32,9 @@ constructor(cd: ChangeDetectorRef, router: Router, public formBuilder: FormBuild
 
 inscription(): void{
  this.submitted =  true;
- console.log("llogin")
+ if(this.formGroup.invalid)
+  return;
+//  console.log("llogin")
  this.service.inscription(this.user);
 };
 

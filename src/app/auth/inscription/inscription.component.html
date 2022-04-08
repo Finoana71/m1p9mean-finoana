@@ -16,7 +16,7 @@
                fieldSize="large"
                autofocus
                class="form-control form-control-sm"/>
-        <ng-container *ngIf="forms.email.errors">
+        <ng-container *ngIf="forms.email.errors&&submitted">
           <p class="caption status-danger" *ngIf="forms.nom.errors?.required">
             Veuillez renseigner un nom
           </p>
@@ -36,7 +36,7 @@
            fieldSize="large"
            autofocus
            class="form-control form-control-sm"/>
-    <ng-container *ngIf="forms.email.errors">
+    <ng-container *ngIf="forms.email.errors&&submitted">
       <p class="caption status-danger" *ngIf="forms.email.errors?.required">
         Veuillez renseigner un email
       </p>
@@ -59,7 +59,7 @@
            placeholder="Mot de passe"
            fieldSize="large"
            class="form-control form-control-sm"/>
-    <ng-container *ngIf="forms.motDePasse.errors">
+    <ng-container *ngIf="forms.motDePasse.errors&&submitted">
       <p class="caption status-danger" *ngIf="forms.motDePasse.errors?.required">
         Veuillez renseigner le mot de passe
       </p>
