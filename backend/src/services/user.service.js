@@ -99,7 +99,7 @@ function genererUtilisateur(req){
     client.motDePasse = bcrypt.hashSync(req.body.motDePasse, 8);
     client.type = req.body.type;
     if(req.body.type == 'Restaurant')
-    client.restaurantId = req.body.restaurantId;
+    client.idRestaurant = req.body.idRestaurant;
     client.active = true;
     return client;
 }
@@ -127,16 +127,16 @@ async function activerToken(token){
     );
 }
 
-
-// Se connecter
+// Nouveau
 async function nouveau(req){
-    validerRequeteLogin(req.body);
+    validerRequeteInscription(req.body);
     let users = await getUtilisateurByEmail(req.body.email);
     if(users.length != 0)
         throw new Error("Cet email est deja utilisé")
     let user = genererUtilisateur(req);
     await User.insert(user);
 }
+
 module.exports = {
     inscrire,
     login,

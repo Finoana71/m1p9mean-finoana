@@ -44,7 +44,9 @@ import { AuthService } from '../../services/auth/auth.service';
       this.submitted =  true;
       if(this.formGroup.invalid)
         return;
+      this.loading=true;
       this.service.login(this.user);
+      this.loading=false;
      };
 
 
@@ -63,6 +65,7 @@ import { AuthService } from '../../services/auth/auth.service';
        return this.formGroup.controls;
      }
 
+    //  public loading = false;
  }
  
  //# sourceMappingURL=login.component.d.ts.map
