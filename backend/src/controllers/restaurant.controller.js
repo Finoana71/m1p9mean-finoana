@@ -42,20 +42,9 @@ const getBeneficeResto = async (req, res) =>{
     }
 }
 
-const getBenefice = async (req, res) =>{
-    try{
-        let benefice = await restaurant.getBenefice(null, req, false);
-        res.send(helper.makeDataApi(benefice, 200, ""));
-    }
-    catch(err){
-        helper.gererErreur(err, res)
-    }
-}
-
 module.exports = {
     insert,
     getAll,
     getCommandeRestaurant,
-    getBeneficeResto,
-    getBenefice
+    getBeneficeResto
 }

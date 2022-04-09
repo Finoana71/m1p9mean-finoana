@@ -55,11 +55,15 @@ dbo.connectToServer(function (err) {
     var indexRouter = require('./backend/src/routes/index');
     var usersRouter = require('./backend/src/routes/users');
     var restoRouter = require('./backend/src/routes/restaurant');
+    var comRouter = require('./backend/src/routes/commande');
+    var platRouter = require('./backend/src/routes/plat');
 
     // // Utiliser les routeurs api
     app.use('/api/', indexRouter);
     app.use('/api/utilisateurs', usersRouter);
     app.use('/api/restaurants', restoRouter);
+    app.use('/api/commandes', comRouter);
+    app.use('/api/plats', platRouter);
 
 	// app.get('/*', function(req,res) {
 	// 	res.sendFile(path.join(__dirname+ '/dist/index.html'));

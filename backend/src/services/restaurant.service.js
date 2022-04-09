@@ -74,17 +74,8 @@ async function getCommandeRestaurant(idResto, req){
     return help.getCollectionPagine(cond, req, Commande);
 }
 
-function getConditionDateCommande(req){
-    let cond = {};
-    if(req.query.dateDebut)
-        cond.date = { $gte: ISODate(req.query.dateDebut)}
-    if(req.query.dateFin)
-        cond.date = { $lte: ISODate(req.query.dateFin)}
-    return cond;
-}
-
 async function getBenefice(idResto, req, avecResto = true){
-    let cond = getConditionDateCommande(req);
+    let cond = help.getConditionDateCommande(req);
     cond.status = "Livre";
     if(avecResto)
     cond.idRestaurant = idResto

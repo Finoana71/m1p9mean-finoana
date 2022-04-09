@@ -13,6 +13,7 @@ async function insertCommande(req){
 
 async function getById(id){
     let commande = await Commande.findOne({_id: ObjectID(id)});
+    return commande;
 }
 
 async function pretALivrer(id){
@@ -40,12 +41,37 @@ async function livrer(id){
 }
 
 async function getCommandeALivrer(idLivreur){
-    let commande = await Commande.find({status: "Livraison"}).toArray();
+    let cond = {status: "Livraison"};
+    cond.idLivreur = idLivreur;
+    let commande = await Commande.find().toArray();
     return commande;
+}
+
+async function getCommandePretALivrer(){
+    let cond = {status: "Pret a livrer"}
+    return help.getCollectionPagine(cond, req, Commande);
+}
+
+async function getAllCommande(req){
+    let cond = help.getConditionDateCommande(req);
+    let user = req.currentUser;
+    if(user.type == "Client")
+        cond.idClient = user.id;
+    else if(user.type == "Livreur")
+        cond.idLivreur = user.id;
+    else if(user.type == "Restaurant")
+        cond.idRestaurant = user.idRestaurant;
+    return help.getCollectionPagine(cond, req, Commande);
 }
 
 module.exports = {
     livrer,
     attribuerLivreur,
-    getCommandeALivrer
+    getCommandeALivrer,
+    insertCommande,
+    pretALivrer,
+    getById,
+    getCommandeALivrer,
+    getCommandePretALivrer,
+    getAllCommande
 }

@@ -59,6 +59,15 @@ function genererConditionSearch(req){
     return cond;
 }
 
+function getConditionDateCommande(req){
+    let cond = {};
+    if(req.query.dateDebut)
+        cond.date = { $gte: ISODate(req.query.dateDebut)}
+    if(req.query.dateFin)
+        cond.date = { $lte: ISODate(req.query.dateFin)}
+    return cond;
+}
+
 module.exports = {
     makeDataApi,
     gererErreur,
@@ -66,5 +75,6 @@ module.exports = {
     getPaginateData,
     getCollectionPagine,
     uploadFile,
-    genererConditionSearch
+    genererConditionSearch,
+    getConditionDateCommande
 }

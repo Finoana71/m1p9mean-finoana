@@ -44,10 +44,8 @@ import { AuthService } from '../../services/auth/auth.service';
       this.submitted =  true;
       if(this.formGroup.invalid)
         return;
-      this.loading=true;
       this.service.login(this.user);
-      this.loading=false;
-     };
+    };
 
 
      ngOnInit(){

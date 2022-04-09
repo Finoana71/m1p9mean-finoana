@@ -12,8 +12,4 @@ router.get('/', controller.getAllUtilisateurs);
 router.get('/get/livreurs', controller.getAllLivreurs);
 
 
-// router.post('/', function(req, res, next) {
-  
-// });
-
 module.exports = router;
