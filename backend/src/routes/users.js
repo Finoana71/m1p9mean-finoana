@@ -10,10 +10,10 @@ router.post('/inscription', controller.inscription);
 router.post('/connexion', controller.connexion);
 router.get('/activer', controller.activer);
 router.post('/', [authMiddle.verifyToken, authMiddle.isAdmin], controller.nouveau);
+// router.get('/', [authMiddle.verifyToken, authMiddle.isAdmin], controller.getAllUtilisateurs);
+router.get('/', controller.getAllUtilisateurs);
+router.get('/get/livreurs', controller.getAllLivreurs);
 
-// router.post('/nouveau', function(req, res, next) {
-  
-// });
 
 // router.post('/', function(req, res, next) {
   

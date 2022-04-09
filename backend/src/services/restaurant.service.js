@@ -57,27 +57,19 @@ async function getRestaurant(adresse, name){
     return await Resto.find({adresse: adresse, nom: name}).toArray();
 }
 
-function genererCondition(req){
-    let cond = {};
-    if(req.query.search)
-        cond.nom = '/' + req.query.search + "/";
-    return cond;
-
-}
-
 async function getAllRestaurant(req){
-    let cond = genererCondition(req);
+    let cond = help.genererConditionSearch(req);
     return help.getCollectionPagine(cond, req, Resto)
 }
 
 async function getPlatRestaurant(idResto, req){
-    let cond = genererCondition(req);
+    let cond = help.genererConditionSearch(req);
     cond.idRestaurant = idResto;
     return help.getCollectionPagine(cond, req, Plat);
 }
 
 async function getCommandeRestaurant(idResto, req){
-    let cond = genererCondition(req);
+    let cond = help.genererConditionSearch(req);
     cond.idRestaurant = idResto;
     return help.getCollectionPagine(cond, req, Commande);
 }
@@ -93,6 +85,7 @@ function getConditionDateCommande(req){
 
 async function getBenefice(idResto, req){
     let cond = getConditionDateCommande(req);
+    cond.status = "Livre";
     return await Commande.aggregate([
         { $match: cond },
         { $group:
@@ -107,5 +100,6 @@ async function getBenefice(idResto, req){
 
 module.exports = {
     getAllRestaurant,
-    getPlatRestaurant
+    getPlatRestaurant,
+    inserer
 }

@@ -30,7 +30,7 @@ async function getCollectionPagine(cond, req, collection){
     let size = 10;
     let page = getPäge(req);
     let offset = getOffset(page, size);
-    let data = await Resto.find(cond).skip(offset).limit(size);
+    let data = await collection.find(cond).skip(offset).limit(size).toArray();
     return getPaginateData(data, page, count, size); 
 }
 
@@ -51,11 +51,20 @@ function uploadFile(content, path){
 }
 
 
+function genererConditionSearch(req){
+    let cond = {};
+    if(req.query.search)
+        cond.nom = new RegExp(req.query.search, 'i')
+    // console.log(cond)
+    return cond;
+}
+
 module.exports = {
     makeDataApi,
     gererErreur,
     getOffset,
     getPaginateData,
     getCollectionPagine,
-    uploadFile
+    uploadFile,
+    genererConditionSearch
 }

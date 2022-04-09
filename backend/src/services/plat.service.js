@@ -55,4 +55,4 @@ async function getPlatRestaurantByNom(nom, idRestaurant){
 async function findOne(id){
     let plat = await Plat.findOne({_id: ObjectID(id)});
     return plat;
-} 
+}

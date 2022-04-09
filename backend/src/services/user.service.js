@@ -8,9 +8,10 @@ let Handlebars = require("handlebars");
 let fs = require("fs");
 const emailService = require("./mail.service")
 var path = require('path');
+const help = require("./../utils/helper")
 
 const baseUrl = require("../../configs/environment").baseUrl;
-
+const ObjectID = db.ObjectID;
 
 
 async function envoyerLienActivation(email, token){
@@ -134,12 +135,33 @@ async function nouveau(req){
     if(users.length != 0)
         throw new Error("Cet email est deja utilisé")
     let user = genererUtilisateur(req);
+    user.valide = true;
     await User.insert(user);
 }
 
+// Livreur
+async function getAllLivreurs(){
+    let livreurs = await User.find({type: "Livreur"}).toArray();
+    return livreurs;
+}
+
+// Livreur findOne
+async function getALivreur(id){
+    let livreur = await User.findOne({type: "Livreur", _id: ObjectID(id)});
+    return livreur;
+}
+
+// Tous les utilisateurs
+async function getAllUtilisateurs(req){
+    let cond = help.genererConditionSearch(req);
+    return help.getCollectionPagine(cond, req, User);
+}
 module.exports = {
     inscrire,
     login,
     activerToken,
-    nouveau
+    nouveau,
+    getALivreur,
+    getAllLivreurs,
+    getAllUtilisateurs
 }

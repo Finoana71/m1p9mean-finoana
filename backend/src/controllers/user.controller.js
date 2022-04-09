@@ -35,9 +35,29 @@ const activer = async (req, res) =>{
 
 const nouveau = async (req, res) =>{
     try{
-        // let token = req.query.token;
         await userServ.nouveau(req);
         res.send(helper.makeDataApi(null, 200, "Utilisateur enregistré avec succès"));
+    }
+    catch(err){
+        helper.gererErreur(err, res)
+    }
+}
+
+
+const getAllUtilisateurs = async (req, res) =>{
+    try{
+        let users = await userServ.getAllUtilisateurs(req);
+        res.send(helper.makeDataApi(users, 200, ""));
+    }
+    catch(err){
+        helper.gererErreur(err, res)
+    }
+}
+
+const getAllLivreurs = async (req, res) =>{
+    try{
+        let users = await userServ.getAllLivreurs();
+        res.send(helper.makeDataApi(users, 200, ""));
     }
     catch(err){
         helper.gererErreur(err, res)
@@ -48,5 +68,7 @@ module.exports = {
     inscription,
     connexion,
     activer,
-    nouveau
+    nouveau,
+    getAllUtilisateurs,
+    getAllLivreurs
 }
