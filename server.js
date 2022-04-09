@@ -54,10 +54,12 @@ dbo.connectToServer(function (err) {
     // // Ajouter des routeurs
     var indexRouter = require('./backend/src/routes/index');
     var usersRouter = require('./backend/src/routes/users');
+    var restoRouter = require('./backend/src/routes/restaurant');
 
     // // Utiliser les routeurs api
     app.use('/api/', indexRouter);
     app.use('/api/utilisateurs', usersRouter);
+    app.use('/api/restaurants', restoRouter);
 
 	// app.get('/*', function(req,res) {
 	// 	res.sendFile(path.join(__dirname+ '/dist/index.html'));

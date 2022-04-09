@@ -27,7 +27,7 @@ async function inserer(req, res){
     Resto.insert(resto).then(
         (data) => {
             insertImageRestaurant(req)
-            res.send("OK")
+            res.send(help.makeDataApi(null, 200, "OK"))
         }
     )
 }
@@ -83,9 +83,11 @@ function getConditionDateCommande(req){
     return cond;
 }
 
-async function getBenefice(idResto, req){
+async function getBenefice(idResto, req, avecResto = true){
     let cond = getConditionDateCommande(req);
     cond.status = "Livre";
+    if(avecResto)
+    cond.idRestaurant = idResto
     return await Commande.aggregate([
         { $match: cond },
         { $group:
@@ -98,8 +100,11 @@ async function getBenefice(idResto, req){
     ]);
 }
 
+
 module.exports = {
     getAllRestaurant,
     getPlatRestaurant,
-    inserer
+    inserer,
+    getCommandeRestaurant,
+    getBenefice
 }
