@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="card col-md-6 mx-auto">
+        <h1>Ajouter un utilisateur</h1>
+        <form [formGroup]="form" (ngSubmit)="valider()" >
+            <div class="form-group row">
+                <label class="label col-sm-3 col-form-label">Nom</label>
+                <div class="col-sm-9">
+                <input type="text" id="inputEmail1" class="form-control form-control-sm"
+                    formControlName="user.nom"
+                    [(ngModel)]="user.nom"
+                >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="label col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                <input type="text" id="inputEmail2" class="form-control form-control-sm"
+                    formControlName="user.email"
+                    [(ngModel)]="user.email"
+                >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="label col-sm-3 col-form-label">Mot de passe</label>
+                <div class="col-sm-9">
+                <input type="password" id="inputEmail3" class="form-control form-control-sm" 
+                    formControlName="user.motDePasse"
+                    [(ngModel)]="user.motDePasse"
+                >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="label col-sm-3 col-form-label">Type</label>
+                <div class="col-sm-9">
+                    <select style="max-width: 180px; float:right" class="form-control form-control-sm"
+                        formControlName="user.type"
+                        [(ngModel)]="user.type"
+                    >
+                        <option value="Ekaly" selected>Ekaly</option>
+                        <option value="Restaurant">Restaurant</option>
+                        <option value="Livreur">Livreur</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="user.type=='Restaurant'" >
+                <label class="label col-sm-3 col-form-label">Restaurant</label>
+                <div class="col-sm-9">
+                    <select style="max-width: 180px; float:right" class="form-control form-control-sm"
+                        formControlName="user.idRestaurant"
+                        [(ngModel)]="user.idRestaurant"
+                    >
+                        <option *ngFor="let item of restaurant"  value="{{item._id}}">{{item.nom}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <button style="max-width: 200px; align-self: center;" class="btn btn-success mx-auto col">Valider</button>
+        </form>
+    </div>  
+</div>

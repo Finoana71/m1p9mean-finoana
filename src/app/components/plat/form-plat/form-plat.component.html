@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="card col-md-6 mx-auto">
+      <div class="card-body">
+            <h3>Ajouter un plat</h3>
+            <form [formGroup]="form" (ngSubmit)="valider()" >
+                <div class="form-group row">
+                    <label class="label col-sm-3 col-form-label">Nom</label>
+                    <div class="col-sm-9">
+                    <input type="text" id="inputEmail1" class="form-control form-control-sm"
+                        formControlName="plat.nom"
+                        [(ngModel)]="plat.nom"
+                    >
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="label col-sm-6 col-form-label">Prix d'achat(Ar)</label>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                    <input type="number" id="inputEmail1" class="form-control form-control-sm"
+                        formControlName="plat.prixAchat"
+                        [(ngModel)]="plat.prixAchat"
+                    >
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="label col-sm-6 col-form-label">Prix de vente(Ar)</label>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                    <input type="number" id="inputEmail1" class="form-control form-control-sm"
+                        formControlName="plat.prixVente"
+                        [(ngModel)]="plat.prixVente"
+                    >
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="label col-sm-3 col-form-label">Photo</label>
+                    <div class="col-sm-9">
+                        <input type="file" accept="image/*" id="inputEmail1" class="form-control" (change)="addFile($event)">
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn btn-success mx-auto db-block">Valider</button>
+                </div>  
+            </form>
+        </div>  
+    </div>  
+</div>

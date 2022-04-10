@@ -1,26 +1,32 @@
 import { NbMenuItem } from '@nebular/theme';
 
-function getUser(){
+export function getUser(){
   return JSON.parse(localStorage.getItem("user"))
 }
 
-function isEkaly(){
+export function isDeconnecte(){
+  let user = getUser();
+  let rep = !user;
+  console.log("isConnecte", rep)
+  return rep;
+}
+export function isEkaly(){
   let user = getUser();
   return user && user.type === "Ekaly";
 }
 
-function isRestaurant(){
+export function isRestaurant(){
   let user = getUser();
   return user && user.type === "Restaurant";
 }
 
-function isClient(){
+export function isClient(){
   let user = getUser();
   return user && user.type === "Client";
 }
 
 
-function isLivreur(){
+export function isLivreur(){
   let user = getUser();
   return user && user.type === "Livreur";
 }
@@ -29,7 +35,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Restaurant',
     icon: 'shopping-cart-outline',
-    link: '/pages/dashboard',
+    link: '/pages/restaurants',
     home: true,
     hidden: isLivreur() || isRestaurant()
   },
@@ -43,14 +49,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Gestion plats',
     icon: 'shopping-cart-outline',
-    link: 'book-open-outline',
+    link: '/pages/plats',
     home: true,
     hidden: !isRestaurant()
   },
   {
     title: 'Gestion utilisateurs',
     icon: 'people-outline',
-    link: 'people-outline',
+    link: '/pages/utilisateurs',
     home: true,
     hidden: !isEkaly()
   },

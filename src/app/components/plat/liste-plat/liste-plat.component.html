@@ -1,0 +1,25 @@
+<div *ngIf="(!plats)||(plats&&plats.length==0)" class="mx-auto" style="margin-top: 40px;">
+    <p class="alert alert-info">Aucun plat à afficher</p>
+</div>
+
+<div *ngIf="plats&&plats.length!=0" class="row">
+    <div class="card mx-auto db-block" *ngFor="let plat of plats | paginate : {
+        itemsPerPage: pageSize,
+        currentPage: page,
+        totalItems: count
+        };
+    let i = index"
+    >
+        <div class="card-header">
+            <img src="{{imageUrl + '/plats/'+ plat.image}}"/>
+        </div>
+        <div class="card-body">
+            <h3>{{plat.nom}}</h3>
+            <p>Prix: {{plat.prixVente | number}} Ar</p>
+            <p>Prix d'achat: {{plat.prixAchat | number}} Ar</p>
+            <div class="row" *ngIf="isClient()||(isDeconnecte())" >
+                <button (click)="panierServ.ajouterPanier(plat)" class="btn btn-primary mx-auto db-block">Ajouter au panier</button>
+            </div>
+        </div>
+    </div>
+</div>

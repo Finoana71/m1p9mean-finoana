@@ -18,6 +18,11 @@ const verifyToken = (req, res, next) => {
     const bearerToken = bearer[1];
 
     jwt.verify(bearerToken, "ekalySecret", async (err, decoded) => {
+        if (!decoded) {
+            return res.status(401).send({
+                message: "Non autorisé!",
+            });
+        }
         req.userId = decoded.userId;
         req.currentUser = await User.findOne({_id: ObjectId(decoded.id)});
         console.log(req.currentUser)

@@ -88,7 +88,7 @@ function verifierType(req){
         throw new Error("Veuillez spécifier le type de l'utilisateur");
     if(req.body.type!='Ekaly'&&req.body.type!='Restaurant'&&req.body.type!='Livreur')
         throw new Error("Type de l'utilisateur non valide");
-    if(!req.body.restaurantId&&req.body.type=='Restaurant')
+    if(!req.body.idRestaurant&&req.body.type=='Restaurant')
         throw new Error("Veuillez spécifier le restaurant");
 }
 
@@ -141,6 +141,7 @@ async function nouveau(req){
 
 // Livreur
 async function getAllLivreurs(){
+    console.log(__dirname + "/../../public/images/restaurant/")
     let livreurs = await User.find({type: "Livreur"}).toArray();
     return livreurs;
 }

@@ -17,14 +17,17 @@ export class AuthService {
     if(err.status == 404)
       this.notif.error("Il y a une erreur au serveur");
     else
-    this.notif.error(err.error.message);
+    this.notif.error(err);
   }
 
   login(user){
     const onSuccess = (response) =>{
-      // localStorage.setItem("user", JSON.stringify(response.data));
-      this.router.navigate(["/dashboard"]);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      this.router.navigateByUrl("/dashboard");
       // window.location.reload();
+      // setTimeout(() =>{
+      //   location.reload()        
+      // }, 500)
     }
     let url = apiUrl + "/utilisateurs/connexion";
     this.http.post(url, user).subscribe(onSuccess, this.onError);
@@ -45,5 +48,8 @@ export class AuthService {
   logout(){
     localStorage.removeItem("user");
     this.router.navigateByUrl("/auth");
+    setTimeout(()=>{
+      location.reload();
+    }) 
   }
 }

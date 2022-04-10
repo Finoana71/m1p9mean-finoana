@@ -10,9 +10,20 @@ const insert = async (req, res) =>{
     }
 }
 
-const getAll = async (req, res) =>{
+// Avec pagination
+const getAllRestaurant = async (req, res) =>{
     try{
         let resto = await restaurant.getAllRestaurant(req);
+        res.send(helper.makeDataApi(resto, 200, ""));
+    }
+    catch(err){
+        helper.gererErreur(err, res)
+    }
+}
+
+const getAll = async (req, res) =>{
+    try{
+        let resto = await restaurant.getAll(req);
         res.send(helper.makeDataApi(resto, 200, ""));
     }
     catch(err){
@@ -42,9 +53,29 @@ const getBeneficeResto = async (req, res) =>{
     }
 }
 
+
+const getPlatsRestaurant = async (req, res) =>{
+    try{
+        let idResto;
+        if(req.params.id)
+            idResto = req.params.id
+        else if(req.currentUser&&req.currentUser.idRestaurant)
+            idResto = req.currentUser.idRestaurant;
+        if(!idResto)
+            throw new Erreur("Il y a une erreur")
+        let plats = await restaurant.getPlatRestaurant(idResto, req);
+        res.send(helper.makeDataApi(plats, 200, ""));
+    }
+    catch(err){
+        helper.gererErreur(err, res)
+    }
+}
+
 module.exports = {
     insert,
     getAll,
     getCommandeRestaurant,
-    getBeneficeResto
+    getBeneficeResto,
+    getAllRestaurant,
+    getPlatsRestaurant
 }

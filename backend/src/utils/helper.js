@@ -1,3 +1,5 @@
+const fs = require("fs")
+
 function makeDataApi(data, status = 200, message = ''){
     return {data, status, message}
 }

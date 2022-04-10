@@ -1,0 +1,24 @@
+<div *ngIf="(!restos)||(restos&&restos.length==0)" class="mx-auto" style="margin-top: 40px;">
+    <p class="alert alert-info">Aucun restaurant à afficher</p>
+</div>
+
+<div *ngIf="restos&&restos.length!=0" class="row">
+    <div class="card mx-auto db-block" *ngFor="let resto of restos | paginate : {
+        itemsPerPage: pageSize,
+        currentPage: page,
+        totalItems: count
+        };
+    let i = index"
+    >
+        <div class="card-header">
+            <img src="{{imageUrl + '/restaurants/'+ resto.image}}"/>
+        </div>
+        <div class="card-body">
+            <h3>{{resto.nom}}</h3>
+            <p>{{resto.adresse}}</p>
+            <div class="row" *ngIf="isClient()||!getUser()" >
+                <button routerLink="/pages/restaurants/{{resto._id}}/plats"class="btn btn-primary mx-auto db-block">Commandez</button>
+            </div>
+        </div>
+    </div>
+</div>

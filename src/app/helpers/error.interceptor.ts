@@ -7,14 +7,17 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthService) { }
+    constructor(private authenticationService: AuthService) { 
+    }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        console.log("slslslsl")
         return next.handle(request).pipe(catchError(err => {
+            console.log(err)
             if (err.status === 401) {
                 // auto logout if 401 response returned from api
                 this.authenticationService.logout();
-                location.reload();
+                // location.reload();
             }
 
             const error = err.error.message || err.statusText;

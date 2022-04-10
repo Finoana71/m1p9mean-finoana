@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="card col-md-8 mx-auto">
+        <div class="card-header">
+            Les restaurants
+        </div>    
+        <div class="card-body">
+            <div class="row" *ngIf="isEkaly()" >
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <button class="btn btn-success db-block mx-auto" style="float: right;" routerLink="/pages/restaurants/ajout">Ajouter</button>
+                </div>
+            </div> 
+            <ngx-liste-resto [restos]="restos"></ngx-liste-resto>   
+        </div>
+    </div>
+</div>
+

@@ -24,9 +24,6 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.static('backend/public'));
-app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'backend/public/index.html'));
-})
 
 dbo.connectToServer(function (err) {
   if (err) {
@@ -35,14 +32,15 @@ dbo.connectToServer(function (err) {
   }
   
     // Make sure you place body-parser before your CRUD handlers
-    app.use(bodyParser.urlencoded({extended: true}))
+    app.use(bodyParser.urlencoded({extended: true}, {limit: '25mb'}))
 
     // Pour que le serveur accepte des datas JSON 
-    app.use(bodyParser.json())
+    app.use(bodyParser.json({limit: '25mb'}))
 
     app.use(logger('dev'));
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: false }));
+    app.use(express.json({limit: '25mb'}));
+    // parse requests of content-type - application/x-www-form-urlencoded
+    app.use(express.urlencoded({ extended: true }, {limit: '25mb'}));
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, 'public')));
 

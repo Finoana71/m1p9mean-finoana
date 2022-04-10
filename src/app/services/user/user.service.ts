@@ -14,4 +14,15 @@ export class UserService {
     let url = apiUrl + "/utilisateurs";
     return this.http.post(url, user);
   }
+
+  getAllRestaurant(){
+    let url = apiUrl + "/restaurants/get/all";
+    return this.http.get(url);
+  }
+
+  getAll(){
+    let url = apiUrl + "/utilisateurs";
+    return this.http.get(url);
+  }
+
 }

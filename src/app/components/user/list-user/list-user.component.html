@@ -1,0 +1,30 @@
+<div *ngIf="users&&users.length==0" class="mx-auto" style="margin-top: 40px;">
+    <p class="alert alert-info">Aucun utilisateur</p>
+</div>
+
+<div *ngIf="users&&users.length!=0" class="table-responsive">
+    <!-- <div class="table-responsive mb-0" *ngIf=" productsData.length != 10; else productsContent"> -->
+    <!-- <table class="table align-middle table-nowrap"> -->
+    <table class="table table-centered table-nowrap table-bordered">
+    <thead class="table-light">
+        <tr>
+        <th scope="col" class="align-middle">Nom</th>
+        <th scope="col" class="align-middle">Email</th>
+        <th scope="col" class="align-middle">Rôle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | paginate : {
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: count
+            };
+        let i = index"
+        >
+            <td>{{user.nom}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.type}}</td>
+                    </tr>
+    </tbody>
+    </table>
+</div>

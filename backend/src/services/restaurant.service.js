@@ -9,6 +9,7 @@ function genererRestaurant(req){
     let rep = {};
     rep.nom = req.body.nom;
     rep.adresse = req.body.adresse;
+    rep.image = req.body.image;
     return rep;
 }
 
@@ -47,9 +48,9 @@ async function inserer(req, res){
 // }
 
 function insertImageRestaurant(req){
-    if(req.body.imageFile)
+    if(!req.body.imageFile)
         return;
-    let path = __basedir + "/assets/images/restaurant/" + req.body.image;
+    let path = __dirname + "/../../public/images/restaurants/" + req.body.image;
     help.uploadFile(req.body.imageFile, path)
 }
 
@@ -60,6 +61,10 @@ async function getRestaurant(adresse, name){
 async function getAllRestaurant(req){
     let cond = help.genererConditionSearch(req);
     return help.getCollectionPagine(cond, req, Resto)
+}
+
+async function getAll(){
+    return await Resto.find().toArray();
 }
 
 async function getPlatRestaurant(idResto, req){
@@ -97,5 +102,6 @@ module.exports = {
     getPlatRestaurant,
     inserer,
     getCommandeRestaurant,
-    getBenefice
+    getBenefice,
+    getAll
 }

@@ -1,3 +1,7 @@
+import { ListePlatPageComponent } from './plats/liste-plat-page/liste-plat-page.component';
+import { AjoutPlatPageComponent } from './plats/ajout-plat-page/ajout-plat-page.component';
+import { ListUserPageComponent } from './user/list-user-page/list-user-page.component';
+import { AddUserPageComponent } from './user/add-user-page/add-user-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -5,6 +9,8 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { ListeRestaurantPageComponent } from './restaurant/liste-restaurant-page/liste-restaurant-page.component';
+import { AjoutRestoPageComponent } from './restaurant/ajout-resto-page/ajout-resto-page.component';
 
 const routes: Routes = [{
   path: '',
@@ -72,6 +78,34 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
+    },
+    {
+      path: 'utilisateurs/ajout',
+      component: AddUserPageComponent 
+    },
+    {
+      path: 'utilisateurs',
+      component: ListUserPageComponent 
+    },
+    {
+      path: 'restaurants/ajout',
+      component: AjoutRestoPageComponent
+    },
+    {
+      path: 'restaurants',
+      component: ListeRestaurantPageComponent 
+    },
+    {
+      path: 'plats/ajout',
+      component: AjoutPlatPageComponent
+    },
+    {
+      path: 'plats',
+      component: ListePlatPageComponent 
+    },
+    {
+      path: 'restaurants/:idResto/plats',
+      component: ListePlatPageComponent 
     },
     {
       path: '**',

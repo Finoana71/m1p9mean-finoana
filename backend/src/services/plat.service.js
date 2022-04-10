@@ -13,9 +13,9 @@ async function creer(req){
 }
 
 function insertImagePlat(req){
-    if(req.body.imageFile)
+    if(!req.body.imageFile)
         return;
-    let path = __basedir + "/assets/images/plat/" + req.body.image;
+    let path = __dirname + "/../../public/images/plats/" + req.body.image;
     help.uploadFile(req.body.imageFile, path)
 }
 
@@ -26,16 +26,19 @@ function validerPlat(req){
         throw new Error("Veuillez renseigner le prix de vente")           
     if(!req.body.nom)
         throw new Error("Veuillez renseigner le nom du plat")           
-    if(!req.body.description)
-        throw new Error("Veuillez renseigner la description du plat")           
+    if(!req.body.image)
+        throw new Error("Veuillez renseigner l'image du plat")           
+    // if(!req.body.description)
+    //     throw new Error("Veuillez renseigner la description du plat")           
 }
 
 function genererPlat(req){
     let plat = {
         prixAchat: req.body.prixAchat,
         prixVente: req.body.prixAchat,
-        nom: req.body.prixAchat,
-        description: req.body.prixAchat,
+        nom: req.body.nom,
+        image: req.body.image,
+        // description: req.body.prixAchat,
         idRestaurant: req.currentUser.idRestaurant
     }
     return plat;
@@ -58,6 +61,8 @@ async function findOne(id){
 }
 
 
+
 module.exports = {
-    creer   
+    creer,
+    findOne   
 }
