@@ -6,20 +6,17 @@ app.use(express.static(__dirname + '/dist/'));
 
 const dbo = require("./backend/configs/db");
 const bodyParser = require("body-parser")
+const PORT = require("./backend/configs/environment").PORT;
 
 var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// JWt token
-const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
-
 // Cors
 const cors = require("cors");
 
 var corsOptions = {
-  origin: ["http://localhost:4200"]
+  origin: ["http://localhost:4200", "https://m1p9mean-finoana.herokuapp.com/"]
 };
 
 app.use(cors(corsOptions));
@@ -63,13 +60,10 @@ dbo.connectToServer(function (err) {
     app.use('/api/commandes', comRouter);
     app.use('/api/plats', platRouter);
 
-	// app.get('/*', function(req,res) {
-	// 	res.sendFile(path.join(__dirname+ '/dist/index.html'));
-	// });
+    app.get('/*', function(req,res) {
+      res.sendFile(path.join(__dirname+ '/dist/index.html'));
+    });
 
-
-    // let pathNoToken = ['/api/utilisateurs/connexion', '/api/utilisateurs/inscription']
-    // app.use(expressJwt({secret: 'ekalySecret', algorithms: ["RS256"]}).unless({path: pathNoToken}));
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
@@ -88,7 +82,7 @@ dbo.connectToServer(function (err) {
     });
 
     //app.use(express.static('public'));
-    app.listen(process.env.PORT || 8080);
+    app.listen(PORT);
 
   // start the Express server
 });

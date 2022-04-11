@@ -47,7 +47,7 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem("user");
-    this.router.navigateByUrl("/auth");
+    this.router.navigateByUrl("/pages/restaurants");
     setTimeout(()=>{
       location.reload();
     }) 
