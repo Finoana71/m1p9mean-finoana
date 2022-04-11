@@ -34,7 +34,7 @@ dbo.connectToServer(function (err) {
     // Pour que le serveur accepte des datas JSON 
     app.use(bodyParser.json({limit: '25mb'}))
 
-    app.use(logger('dev'));
+    //app.use(logger('dev'));
     app.use(express.json({limit: '25mb'}));
     // parse requests of content-type - application/x-www-form-urlencoded
     app.use(express.urlencoded({ extended: true }, {limit: '25mb'}));
