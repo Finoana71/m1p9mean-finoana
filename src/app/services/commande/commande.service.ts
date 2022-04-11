@@ -49,4 +49,10 @@ export class CommandeService {
     let url = apiUrl + "/commandes";
     return this.http.get(url, {params});
   }
+
+  pretALivrer(id){
+    let url = apiUrl + "/commandes/" + id + "/pretALivrer";
+    return this.http.put(url,{});
+  }
+
 }

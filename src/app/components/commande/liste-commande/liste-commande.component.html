@@ -21,7 +21,7 @@
             <td *ngIf="!isClient()"style="text-align: right;">{{com.prixLivraison | number}} Ar</td>
             <td>
                 <button *ngIf="com.status=='Nouvelle'&&isClient()" class="btn btn-danger">Annuler</button>
-                <button *ngIf="com.status=='Nouvelle'&&isRestaurant()" class="btn btn-warning">Prêt à livrer</button>
+                <button *ngIf="com.status=='Nouvelle'&&isRestaurant()" class="btn btn-warning" (click)="pretALivrer(i)">Prêt à livrer</button>
                 <button *ngIf="com.status=='Pret a livrer'&&isEkaly()" class="btn btn-success">Attribuer à un livreur</button>
             </td>
         </tr>

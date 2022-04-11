@@ -14,7 +14,7 @@ async function insertCommande(req){
 }
 
 async function getById(id){
-    let commande = await Commande.findOne({_id: ObjectID(id)});
+    let commande = await Commande.findOne({_id: ObjectId(id)});
     return commande;
 }
 
@@ -62,7 +62,7 @@ async function getAllCommande(req){
     else if(user.type == "Livreur")
         cond.idLivreur =  ObjectId(user._id);
     else if(user.type == "Restaurant")
-        cond.idRestaurant =  ObjectId(user.idRestaurant);
+        cond.idRestaurant =  user.idRestaurant;
         console.log(cond);
     return help.getCollectionPagine(cond, req, Commande);
 }
