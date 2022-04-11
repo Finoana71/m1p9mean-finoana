@@ -20,3 +20,6 @@ Mongo db:
     Login finoana
 
     mongodb+srv://finoana:Abcd1234@cluster0.smfgs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+
+ETU 000941
