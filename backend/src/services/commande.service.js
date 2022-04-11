@@ -32,7 +32,7 @@ async function attribuerLivreur(id, idLivreur){
         throw new Error("Le livreur n'existe pas")
     if(commande.status != "Pret a livrer")
         throw new Error("Cette commande n'est pas encore prêt à livrer");
-    await Commande.update({_id: ObjectId(id)}, {$set:{status: "Livraison", idLivreur: idLivreur}});
+    await Commande.update({_id: ObjectId(id)}, {$set:{status: "Livraison", idLivreur: idLivreur, livreur: livreur.nom}});
 }
 
 async function livrer(id){
@@ -44,8 +44,10 @@ async function livrer(id){
 
 async function getCommandeALivrer(idLivreur){
     let cond = {status: "Livraison"};
-    cond.idLivreur = idLivreur;
-    let commande = await Commande.find().toArray();
+    cond.idLivreur = ObjectId(idLivreur).toString();
+    // console.log("***********************")
+    // console.log(cond)
+    let commande = await Commande.find(cond).toArray();
     return commande;
 }
 

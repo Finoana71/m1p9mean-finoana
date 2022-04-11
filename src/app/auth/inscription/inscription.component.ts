@@ -19,6 +19,7 @@ strategy: string;
 errors: string[];
 messages: string[];
 user: any = {
+  nom: "",
   email: "",
   motDePasse: "",
 };
@@ -47,7 +48,7 @@ buildForm(){
   this.formGroup = this.formBuilder.group({
     email: [this.user.email, Validators.required],
     motDePasse: [this.user.motDePasse, [Validators.required, Validators.email]],
-    nom: [this.user.motDePasse, Validators.required],
+    nom: [this.user.nom, Validators.required],
   })
 }
 

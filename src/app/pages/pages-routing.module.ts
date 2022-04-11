@@ -1,3 +1,6 @@
+import { AlivrerComponent } from './commande/alivrer/alivrer.component';
+import { ECommerceComponent } from './e-commerce/e-commerce.component';
+import { DetailsCommandePageComponent } from './commande/details-commande-page/details-commande-page.component';
 import { ListePlatPageComponent } from './plats/liste-plat-page/liste-plat-page.component';
 import { AjoutPlatPageComponent } from './plats/ajout-plat-page/ajout-plat-page.component';
 import { ListUserPageComponent } from './user/list-user-page/list-user-page.component';
@@ -7,7 +10,6 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { ListeRestaurantPageComponent } from './restaurant/liste-restaurant-page/liste-restaurant-page.component';
 import { AjoutRestoPageComponent } from './restaurant/ajout-resto-page/ajout-resto-page.component';
@@ -27,16 +29,6 @@ const routes: Routes = [{
       component: DashboardComponent,
     },
     {
-      path: 'layout',
-      loadChildren: () => import('./layout/layout.module')
-        .then(m => m.LayoutModule),
-    },
-    {
-      path: 'forms',
-      loadChildren: () => import('./forms/forms.module')
-        .then(m => m.FormsModule),
-    },
-    {
       path: 'ui-features',
       loadChildren: () => import('./ui-features/ui-features.module')
         .then(m => m.UiFeaturesModule),
@@ -47,24 +39,9 @@ const routes: Routes = [{
         .then(m => m.ModalOverlaysModule),
     },
     {
-      path: 'extra-components',
-      loadChildren: () => import('./extra-components/extra-components.module')
-        .then(m => m.ExtraComponentsModule),
-    },
-    {
       path: 'maps',
       loadChildren: () => import('./maps/maps.module')
         .then(m => m.MapsModule),
-    },
-    {
-      path: 'charts',
-      loadChildren: () => import('./charts/charts.module')
-        .then(m => m.ChartsModule),
-    },
-    {
-      path: 'editors',
-      loadChildren: () => import('./editors/editors.module')
-        .then(m => m.EditorsModule),
     },
     {
       path: 'tables',
@@ -112,6 +89,14 @@ const routes: Routes = [{
     {
       path: 'commandes',
       component: ListeCommandePageComponent 
+    },
+    {
+      path: 'commandes/:id',
+      component: DetailsCommandePageComponent 
+    },
+    {
+      path: 'commandes/get/aLivrer',
+      component: AlivrerComponent 
     },
     {
       path: 'restaurants/:idResto/plats',

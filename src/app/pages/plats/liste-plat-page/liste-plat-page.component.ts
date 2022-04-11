@@ -51,15 +51,16 @@ export class ListePlatPageComponent implements OnInit {
 
   loading = false;
   refreshResto(){
-    this.loading = true;
     const onSuccess = (res) =>{
       // console.log(res)
       this.resto = res.data;
       // console.log(this.resto)
       this.loading = false;
     } 
-    if(this.idResto)
+    if(this.idResto){
+      this.loading = true;
       this.restoServ.getById(this.idResto).subscribe(onSuccess, this.onError);
+    }
     
   }
 

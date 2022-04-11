@@ -25,7 +25,7 @@ const pretALivrer = async (req, res) =>{
 
 const attribuerLivreur = async (req, res) =>{
     try{
-        let idLivreur = req.query.idLivreur;
+        let idLivreur = req.body.idLivreur;
         let idCommande = req.params.id;
         await comServ.attribuerLivreur(idCommande, idLivreur)
         res.send(helper.makeDataApi(null));
@@ -58,7 +58,9 @@ const getBenefice = async (req, res) =>{
 
 const getCommandeALivrer = async (req, res) =>{
     try{
-        let idLivreur = req.currentUser.id;
+        let idLivreur = req.currentUser._id;
+        console.log("-------------------------")
+        console.log(idLivreur)
         let com = await comServ.getCommandeALivrer(idLivreur);
         res.send(helper.makeDataApi(com, 200, ""));
     }

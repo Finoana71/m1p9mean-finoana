@@ -1,0 +1,26 @@
+<div class="row" *ngIf="commandes" >
+    <div class="card col-md-6 mx-auto">
+        <div class="card-header">
+            Les commandes à livrer
+        </div>    
+        <div class="card-body">
+            <div *ngFor="let item of commandes"  class="col" [dndDraggable]="item">
+                <h6>Date: {{item.date | date}}</h6>
+                <p>Client: {{item.client}}</p>
+                <h6>Prix vente: {{item.prixVente | number}} Ar</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-md-6 mx-auto">
+        <div class="card-header">
+            Commandes livrées
+        </div>    
+        <section style="width: 200px; height: 300px;" dndDropzone
+         (dndDragover)="onDragover($event)"
+         (dndDrop)="onDrop($event)">
+
+        </section>
+    </div>
+</div>
+

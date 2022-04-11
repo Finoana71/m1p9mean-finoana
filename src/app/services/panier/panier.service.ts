@@ -59,7 +59,7 @@ export class PanierService {
       panier.prixAchat += plat.prixAchat;
   }
 
-  ajouterPanier(plat){
+  ajouterPanier(plat, resto){
       let panier = this.getPanier();
       if(panier.plats.length != 0 && plat.idRestaurant != panier.idRestaurant){
           this.toast.warning("Vous avez changé de restaurant, les plats de l'ancien seront supprimés")
@@ -68,6 +68,7 @@ export class PanierService {
           panier.prixAchat = 0;    
       }
       panier.idRestaurant = plat.idRestaurant;
+      panier.restaurant = resto.nom;
       this.ajouterPlatPanier(plat, panier);
       localStorage.setItem("panier", JSON.stringify(panier))
   }

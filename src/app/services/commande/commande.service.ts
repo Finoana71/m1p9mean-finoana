@@ -55,4 +55,18 @@ export class CommandeService {
     return this.http.put(url,{});
   }
 
+  getById(id){
+    let url = apiUrl + "/commandes/" + id;
+    return this.http.get(url);
+  }
+
+  getALivrer(){
+    let url = apiUrl + "/commandes/get/aLivrer";
+    return this.http.get(url);
+  }
+
+  attribuerLivreur(id, idLivreur){
+    let url = apiUrl + "/commandes/" + id + "/attribuerLivreur";
+    return this.http.put(url,{idLivreur});
+  }
 }

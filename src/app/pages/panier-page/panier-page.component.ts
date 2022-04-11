@@ -33,6 +33,8 @@ export class PanierPageComponent implements OnInit {
     this.loading = true;
     setTimeout(()=>{
       this.panier.plats.splice(i, 1);
+      localStorage.setItem("panier", JSON.stringify(this.panier))
+      location.reload()
       this.loading = false;    
     }, 200)
   }

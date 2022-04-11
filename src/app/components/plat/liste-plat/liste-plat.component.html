@@ -18,7 +18,7 @@
             <p>Prix: {{plat.prixVente | number}} Ar</p>
             <p>Prix d'achat: {{plat.prixAchat | number}} Ar</p>
             <div class="row" *ngIf="isClient()||(isDeconnecte())" >
-                <button (click)="panierServ.ajouterPanier(plat)" class="btn btn-primary mx-auto db-block">Ajouter au panier</button>
+                <button (click)="panierServ.ajouterPanier(plat, resto)" class="btn btn-primary mx-auto db-block">Ajouter au panier</button>
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@
             <th *ngIf="!isClient()">Prix d'achat</th>
             <th *ngIf="!isClient()">Prix de livraison</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,8 +23,33 @@
             <td>
                 <button *ngIf="com.status=='Nouvelle'&&isClient()" class="btn btn-danger">Annuler</button>
                 <button *ngIf="com.status=='Nouvelle'&&isRestaurant()" class="btn btn-warning" (click)="pretALivrer(i)">Prêt à livrer</button>
-                <button *ngIf="com.status=='Pret a livrer'&&isEkaly()" class="btn btn-success">Attribuer à un livreur</button>
+                <button *ngIf="com.status=='Pret a livrer'&&isEkaly()" class="btn btn-success" (click)="showLivreur(i, content)">Attribuer à un livreur</button>
+            </td>
+            <td>
+                <button routerLink="/pages/commandes/{{com._id}}" class="btn btn-info">Détails</button>
             </td>
         </tr>
     </tbody>
 </table>
+
+<ng-template #content role="document" let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title mt-0">Attribuer à un livreur</h5>
+      <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row mb-4">
+                <label class="col-sm-3 col-form-label">Livreur</label>
+                <div class="col-sm-9">
+                    <select (change)="changeLivreur($event)" class="form-control form-control-sm">
+                        <option *ngFor="let item of livreurs; let i = index" value="{{i}}">{{item.nom}}</option> 
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <button (click)="attribuerLivreur()" type="button" class="btn btn-success mx-auto db-block" style="width: 200px;">Attribuer</button>
+            </div>
+        </form>
+    </div>
+  </ng-template>

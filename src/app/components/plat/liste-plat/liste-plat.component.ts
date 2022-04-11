@@ -24,5 +24,6 @@ export class ListePlatComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input() plats = [];
+  @Input() plats;
+  @Input() resto;
 }

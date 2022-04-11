@@ -19,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ListeCommandePageComponent } from './commande/liste-commande-page/liste-commande-page.component';
 import { DetailsCommandePageComponent } from './commande/details-commande-page/details-commande-page.component';
+import { AlivrerComponent } from './commande/alivrer/alivrer.component';
+import { DndModule } from 'ngx-drag-drop';
 
 @NgModule({
   imports: [
@@ -30,7 +32,8 @@ import { DetailsCommandePageComponent } from './commande/details-commande-page/d
     MiscellaneousModule,
     ComponentsModule,
     FormsModule,
-    NgxLoadingModule
+    NgxLoadingModule,
+    DndModule,
   ],
   declarations: [
     PagesComponent,
@@ -43,6 +46,7 @@ import { DetailsCommandePageComponent } from './commande/details-commande-page/d
     PanierPageComponent,
     ListeCommandePageComponent,
     DetailsCommandePageComponent,
+    AlivrerComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

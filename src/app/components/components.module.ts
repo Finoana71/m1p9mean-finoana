@@ -1,6 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { FormsModule } from './../pages/forms/forms.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbButtonModule } from '@nebular/theme';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +12,7 @@ import { ListePlatComponent } from './plat/liste-plat/liste-plat.component';
 import { FormPlatComponent } from './plat/form-plat/form-plat.component';
 import { ListeCommandeComponent } from './commande/liste-commande/liste-commande.component';
 import { DetailsCommandeComponent } from './commande/details-commande/details-commande.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -33,7 +33,8 @@ import { DetailsCommandeComponent } from './commande/details-commande/details-co
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-    RouterModule
+    RouterModule,
+    NgbModalModule
   ],
   exports: [
     FormUserComponent,

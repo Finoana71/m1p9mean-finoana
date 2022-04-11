@@ -1,1 +1,11 @@
-<p>details-commande-page works!</p>
+<div class="row">
+    <div class="card col-md-10 mx-auto">
+        <div class="card-header">
+            Commande
+        </div>    
+        <div class="card-body">
+            <ngx-details-commande *ngIf="commande" [panier]="commande"></ngx-details-commande>
+        </div>
+    </div>
+</div>
+ 

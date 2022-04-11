@@ -9,7 +9,7 @@ const imageUrl = environment.imageUrl;
 })
 export class DetailsCommandeComponent implements OnInit {
 
-  imageUrl = imageUrl + "/images/plats/";
+  imageUrl = imageUrl + "/plats/";
   @Input() panier;
   isClient = isClient;
   client;

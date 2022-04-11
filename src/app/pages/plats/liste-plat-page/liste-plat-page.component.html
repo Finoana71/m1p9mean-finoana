@@ -10,7 +10,7 @@
                     <button class="btn btn-success db-block mx-auto" style="float: right;" routerLink="/pages/plats/ajout">Ajouter</button>
                 </div>
             </div> 
-            <ngx-liste-plat *ngIf="plats" [plats]="plats"></ngx-liste-plat>   
+            <ngx-liste-plat *ngIf="plats" [resto]="resto" [plats]="plats"></ngx-liste-plat>   
             <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
         </div>
     </div>

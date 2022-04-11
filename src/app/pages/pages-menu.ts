@@ -42,7 +42,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Plat à livrer',
     icon: 'shopping-cart-outline',
-    link: '/pages/dashboard',
+    link: '/pages/commandes/get/aLivrer',
     home: true,
     hidden: !isLivreur()
   },
@@ -57,13 +57,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Gestion utilisateurs',
     icon: 'people-outline',
     link: '/pages/utilisateurs',
-    home: true,
-    hidden: !isEkaly()
-  },
-  {
-    title: 'Gestion livraison',
-    icon: 'car-outline',
-    link: '/pages/dashboard',
     home: true,
     hidden: !isEkaly()
   },
