@@ -130,6 +130,5 @@
   "engines": {
     "node": "14.17.4",
     "npm": "6.14.14"
-  },
-  "heroku-postbuild": "ng build --prod"
+  }
 }
