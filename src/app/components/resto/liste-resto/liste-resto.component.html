@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="restos&&restos.length!=0" class="row">
-    <div class="card mx-auto db-block mt-2 ml-1" *ngFor="let resto of restos | paginate : {
+    <div class="card mx-auto db-block mt-4 mr-4" *ngFor="let resto of restos | paginate : {
         itemsPerPage: pageSize,
         currentPage: page,
         totalItems: count

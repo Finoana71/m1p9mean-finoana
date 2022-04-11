@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-4">
+        <h5 *ngIf="!isClient()">Client: {{panier.client}}</h5>
+        <h5>Date: {{panier.date | date}}</h5>
+        <h6>Total prix de vente: {{panier.prixVente | number}} Ar</h6>
+        <h6 *ngIf="!isClient()">Total prix d'achat: {{panier.prixAchat | number}} Ar</h6>
+        <h6>Prix de livraison: {{panier.prixLivraison | number}} Ar</h6>
+    </div>
+</div>
+
+<table class="table table-bordered" *ngIf="panier.plats.length!=0">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Plat</th>
+            <th>Quantité</th>
+            <th>Prix unitaire</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let plat of panier.plats; let i = index">
+            <td>
+                <img src="{{imageUrl+plat.image}}" style="max-width: 75px;"/>
+            </td>
+            <td>{{plat.nom}}</td>
+            <td style="text-align: right;">{{plat.quantite | number}}</td>
+            <td style="text-align: right;">{{plat.prixVente | number}} Ar</td>
+            <td style="text-align: right;"><button class="btn btn-outline-danger" (click)="supprimer(i)">Supprimer</button></td>
+        </tr>
+    </tbody>
+</table>

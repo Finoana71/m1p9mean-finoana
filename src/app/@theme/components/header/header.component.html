@@ -11,7 +11,7 @@
   <nb-actions size="small">
 
     <nb-action class="user-action" *nbIsGranted="['view', 'user']" >
-      <a *ngIf="!user||(user&&user.type=='Client')"  style="margin-right: 12px;">
+      <a *ngIf="!user||(user&&user.type=='Client')"  style="margin-right: 12px;" routerLink="/pages/panier">
         <i class="car-outline"></i>
         Panier
         <span class="badge badge-info">{{panier.getPanier().plats.length}}</span>

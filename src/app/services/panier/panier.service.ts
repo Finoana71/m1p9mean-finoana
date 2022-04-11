@@ -33,7 +33,7 @@ export class PanierService {
       let rep:any = {};
       rep.nom = plat.nom;
       rep.prixAchat = plat.prixAchat;
-      rep.priVente = plat.priVente;
+      rep.prixVente = plat.prixVente;
       rep.image = plat.image;
       rep.quantite = 1;
       return rep;

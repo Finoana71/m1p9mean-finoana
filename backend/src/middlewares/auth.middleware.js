@@ -38,7 +38,7 @@ const verifyToken = (req, res, next) => {
 const isAdmin = (req, res, next) => {
     let data = req.currentUser;
     if(!data||data.type != 'Ekaly'){
-        res.status(401).send({message: "Non autorisé"})
+        res.status(403).send({message: "Non autorisé"})
         return;
     }
     next();
@@ -47,14 +47,33 @@ const isAdmin = (req, res, next) => {
 const isRestaurant = (req, res, next) => {
     let data = req.currentUser;
     if(!data||data.type != 'Restaurant'){
-        res.status(401).send({message: "Non autorisé"})
+        res.status(403).send({message: "Non autorisé"})
         return;
     }
     next();
 }
 
+const isLivreur = (req, res, next) => {
+    let data = req.currentUser;
+    if(!data||data.type != 'Livreur'){
+        res.status(403).send({message: "Non autorisé"})
+        return;
+    }
+    next();
+}
+
+const isClient = (req, res, next) => {
+    let data = req.currentUser;
+    if(!data||data.type != 'Client'){
+        res.status(403).send({message: "Non autorisé"})
+        return;
+    }
+    next();
+}
 module.exports = {
     isAdmin,
     verifyToken,
-    isRestaurant
+    isRestaurant,
+    isClient,
+    isLivreur
 }

@@ -7,7 +7,7 @@ export function getUser(){
 export function isDeconnecte(){
   let user = getUser();
   let rep = !user;
-  console.log("isConnecte", rep)
+  // console.log("isConnecte", rep)
   return rep;
 }
 export function isEkaly(){
@@ -68,11 +68,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     hidden: !isEkaly()
   },
   {
-    title: 'Gestion commande',
+    title: 'Commandes',
     icon: 'shopping-bag-outline',
-    link: '/pages/dashboard',
+    link: '/pages/commandes',
     home: true,
-    hidden: !isRestaurant()
+    hidden: isDeconnecte()
   },
   {
     title: 'Benefice par restaurant',

@@ -3,6 +3,7 @@ const ISODate = db.ISODate;
 const Resto = db.collection("restaurants");
 const Plat = db.collection("plats");
 const Commande = db.collection("commandes");
+const { ObjectId } = require("mongodb");
 const help = require("./../utils/helper")
 
 function genererRestaurant(req){
@@ -58,6 +59,10 @@ async function getRestaurant(adresse, name){
     return await Resto.find({adresse: adresse, nom: name}).toArray();
 }
 
+async function getRestaurantById(id){
+    return await Resto.findOne({_id: ObjectId(id)});
+}
+
 async function getAllRestaurant(req){
     let cond = help.genererConditionSearch(req);
     return help.getCollectionPagine(cond, req, Resto)
@@ -103,5 +108,6 @@ module.exports = {
     inserer,
     getCommandeRestaurant,
     getBenefice,
-    getAll
+    getAll,
+    getRestaurantById
 }

@@ -31,6 +31,19 @@ const getAll = async (req, res) =>{
     }
 }
 
+
+const getById = async (req, res) =>{
+    try{
+        let resto = await restaurant.getRestaurantById(req.params.id);
+        if(!resto)
+            throw new Error("Ce restaurant n'existe pas")
+        res.send(helper.makeDataApi(resto, 200, ""));
+    }
+    catch(err){
+        helper.gererErreur(err, res)
+    }
+}
+
 const getCommandeRestaurant = async (req, res) =>{
     try{
         let idResto = req.currentUser.idRestaurant;
@@ -77,5 +90,6 @@ module.exports = {
     getCommandeRestaurant,
     getBeneficeResto,
     getAllRestaurant,
-    getPlatsRestaurant
+    getPlatsRestaurant,
+    getById
 }

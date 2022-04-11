@@ -1,0 +1,29 @@
+
+<table class="table table-bordered" *ngIf="commandes&&commandes.length!=0">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th *ngIf="!isClient()">Client</th>
+            <th>Statut</th>
+            <th>Prix</th>
+            <th *ngIf="!isClient()">Prix d'achat</th>
+            <th *ngIf="!isClient()">Prix de livraison</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let com of commandes; let i = index">
+            <td>{{com.date | date }}</td>
+            <td *ngIf="!isClient()">{{com.client }}</td>
+            <td >{{com.status }}</td>
+            <td  style="text-align: right;">{{com.prixVente | number}} Ar</td>
+            <td *ngIf="!isClient()" style="text-align: right;">{{com.prixAchat | number}} Ar</td>
+            <td *ngIf="!isClient()"style="text-align: right;">{{com.prixLivraison | number}} Ar</td>
+            <td>
+                <button *ngIf="com.status=='Nouvelle'&&isClient()" class="btn btn-danger">Annuler</button>
+                <button *ngIf="com.status=='Nouvelle'&&isRestaurant()" class="btn btn-warning">Prêt à livrer</button>
+                <button *ngIf="com.status=='Pret a livrer'&&isEkaly()" class="btn btn-success">Attribuer à un livreur</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

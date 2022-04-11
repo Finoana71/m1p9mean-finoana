@@ -11,6 +11,8 @@ import { AjoutRestoComponent } from './resto/ajout-resto/ajout-resto.component';
 import { ListeRestoComponent } from './resto/liste-resto/liste-resto.component';
 import { ListePlatComponent } from './plat/liste-plat/liste-plat.component';
 import { FormPlatComponent } from './plat/form-plat/form-plat.component';
+import { ListeCommandeComponent } from './commande/liste-commande/liste-commande.component';
+import { DetailsCommandeComponent } from './commande/details-commande/details-commande.component';
 
 
 
@@ -21,7 +23,9 @@ import { FormPlatComponent } from './plat/form-plat/form-plat.component';
     AjoutRestoComponent,
     ListeRestoComponent,
     ListePlatComponent,
-    FormPlatComponent
+    FormPlatComponent,
+    ListeCommandeComponent,
+    DetailsCommandeComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +41,9 @@ import { FormPlatComponent } from './plat/form-plat/form-plat.component';
     AjoutRestoComponent,
     ListeRestoComponent,
     FormPlatComponent,
-    ListePlatComponent
+    ListePlatComponent,
+    ListeCommandeComponent,
+    DetailsCommandeComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

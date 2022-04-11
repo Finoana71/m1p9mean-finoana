@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="card col-md-8 mx-auto">
+    <div class="card col-md-10 mx-auto">
         <div class="card-header">
             Les restaurants
         </div>    
@@ -10,7 +10,8 @@
                     <button class="btn btn-success db-block mx-auto" style="float: right;" routerLink="/pages/restaurants/ajout">Ajouter</button>
                 </div>
             </div> 
-            <ngx-liste-resto [restos]="restos"></ngx-liste-resto>   
+            <ngx-liste-resto *ngIf="restos" [restos]="restos"></ngx-liste-resto>
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 const db = require("../../configs/db").getDb();
 const Plat = db.collection("plats");
-const ObjectID = db.ObjectID;
+const { ObjectId } = require("mongodb");
 const help = require("./../utils/helper")
 
 async function creer(req){
@@ -56,7 +56,7 @@ async function getPlatRestaurantByNom(nom, idRestaurant){
 }
 
 async function findOne(id){
-    let plat = await Plat.findOne({_id: ObjectID(id)});
+    let plat = await Plat.findOne({_id: ObjectId(id)});
     return plat;
 }
 

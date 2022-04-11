@@ -11,6 +11,8 @@ import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { ListeRestaurantPageComponent } from './restaurant/liste-restaurant-page/liste-restaurant-page.component';
 import { AjoutRestoPageComponent } from './restaurant/ajout-resto-page/ajout-resto-page.component';
+import { PanierPageComponent } from './panier-page/panier-page.component';
+import { ListeCommandePageComponent } from './commande/liste-commande-page/liste-commande-page.component';
 
 const routes: Routes = [{
   path: '',
@@ -102,6 +104,14 @@ const routes: Routes = [{
     {
       path: 'plats',
       component: ListePlatPageComponent 
+    },
+    {
+      path: 'panier',
+      component: PanierPageComponent 
+    },
+    {
+      path: 'commandes',
+      component: ListeCommandePageComponent 
     },
     {
       path: 'restaurants/:idResto/plats',

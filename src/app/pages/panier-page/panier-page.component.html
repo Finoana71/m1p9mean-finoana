@@ -1,1 +1,70 @@
-<p>panier-page works!</p>
+<div class="row">
+    <div class="card col-md-8 mx-auto">
+        <div class="card-header">
+            Mon panier
+        </div>    
+        <div class="card-body">
+            <div *ngIf="panier.plats.length==0" class="row" style="text-align: center;">
+                <p class="alert alert-info mx-auto">Votre panier est vide</p>
+            </div>
+
+            <div *ngIf="panier.plats.length==0" class="row" style="text-align: center;">
+                <button routerLink="/pages/restaurants" class="btn btn-success mx-auto">Voir les restaurants</button>
+            </div>
+
+            <table class="table table-bordered" *ngIf="panier.plats.length!=0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Plat</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let plat of panier.plats; let i = index">
+                        <td>
+                            <img src="{{imageUrl+plat.image}}" style="max-width: 75px;"/>
+                        </td>
+                        <td>{{plat.nom}}</td>
+                        <td style="text-align: right;"><input min="0" (input)="changeQte(i)" type="number" [(ngModel)]="plat.quantite"/></td>
+                        <td style="text-align: right;">{{plat.prixVente | number}} Ar</td>
+                        <td style="text-align: right;"><button class="btn btn-outline-danger" (click)="supprimer(i)">Supprimer</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div *ngIf="panier.plats.length!=0" style="text-align: center;">
+                <div class="row mb-2">
+                    <div class="col">
+                        <button (click)="mettreAjour()" class="btn btn-warning" style="float: right">Mettre à jour</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button routerLink="/pages/restaurants/{{panier.idRestaurant}}/plats" class="btn btn-success" style="float: right;">Continuer à acheter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="isClient()&&panier.plats.length!=0">
+                <button (click)="valider()" class="btn btn-primary mx-auto">Valider la commande</button>
+            </div>
+
+            <div *ngIf="isDeconnecte()">    
+                <div class="row" style="text-align: center!important;">
+                    <div class="col">
+                        <p>Veuillez vous connecter pour valider la commande</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <button routerLink="/auth/login" class="btn btn-primary mx-auto">Se connecter</button>
+                </div>
+            </div>
+        
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+        </div>
+    </div>
+</div>
+

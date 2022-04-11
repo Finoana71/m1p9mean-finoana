@@ -8,6 +8,7 @@ router.post('/', controller.insert);
 router.get('/', controller.getAllRestaurant);
 router.get('/get/commandes', controller.getCommandeRestaurant);
 router.get('/:id/plats', controller.getPlatsRestaurant);
+router.get('/:id', controller.getById);
 router.get('/get/all', controller.getAll);
 router.get('/get/benefice', controller.getBeneficeResto);
 

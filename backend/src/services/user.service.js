@@ -8,7 +8,8 @@ let Handlebars = require("handlebars");
 let fs = require("fs");
 const emailService = require("./mail.service")
 var path = require('path');
-const help = require("./../utils/helper")
+const help = require("./../utils/helper");
+const { ObjectId } = require('mongodb');
 
 const baseUrl = require("../../configs/environment").baseUrl;
 const ObjectID = db.ObjectID;
@@ -148,7 +149,7 @@ async function getAllLivreurs(){
 
 // Livreur findOne
 async function getALivreur(id){
-    let livreur = await User.findOne({type: "Livreur", _id: ObjectID(id)});
+    let livreur = await User.findOne({type: "Livreur", _id: ObjectId(id)});
     return livreur;
 }
 
@@ -157,6 +158,12 @@ async function getAllUtilisateurs(req){
     let cond = help.genererConditionSearch(req);
     return help.getCollectionPagine(cond, req, User);
 }
+
+async function getById(id){
+    let client = await User.findOne({_id: ObjectId(id)});
+    return client;
+}
+
 module.exports = {
     inscrire,
     login,
@@ -164,5 +171,6 @@ module.exports = {
     nouveau,
     getALivreur,
     getAllLivreurs,
-    getAllUtilisateurs
+    getAllUtilisateurs,
+    getById
 }

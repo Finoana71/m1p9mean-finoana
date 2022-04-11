@@ -15,6 +15,10 @@ import { AjoutRestoPageComponent } from './restaurant/ajout-resto-page/ajout-res
 import { AjoutPlatPageComponent } from './plats/ajout-plat-page/ajout-plat-page.component';
 import { ListePlatPageComponent } from './plats/liste-plat-page/liste-plat-page.component';
 import { PanierPageComponent } from './panier-page/panier-page.component';
+import { FormsModule } from '@angular/forms';
+import { NgxLoadingModule } from 'ngx-loading';
+import { ListeCommandePageComponent } from './commande/liste-commande-page/liste-commande-page.component';
+import { DetailsCommandePageComponent } from './commande/details-commande-page/details-commande-page.component';
 
 @NgModule({
   imports: [
@@ -24,7 +28,9 @@ import { PanierPageComponent } from './panier-page/panier-page.component';
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule,
+    NgxLoadingModule
   ],
   declarations: [
     PagesComponent,
@@ -35,6 +41,8 @@ import { PanierPageComponent } from './panier-page/panier-page.component';
     AjoutPlatPageComponent,
     ListePlatPageComponent,
     PanierPageComponent,
+    ListeCommandePageComponent,
+    DetailsCommandePageComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

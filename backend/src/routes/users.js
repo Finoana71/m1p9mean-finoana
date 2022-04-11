@@ -5,7 +5,8 @@ const authMiddle = require("../middlewares/auth.middleware");
 
 router.post('/inscription', controller.inscription);
 router.post('/connexion', controller.connexion);
-router.get('/activer', controller.activer);
+router.put('/activer', controller.activer);
+router.get('/:id', [authMiddle.verifyToken], controller.getById);
 // router.post('/', [authMiddle.verifyToken, authMiddle.isAdmin], controller.nouveau);
 router.post('/', controller.nouveau);
 // router.get('/', [authMiddle.verifyToken, authMiddle.isAdmin], controller.getAllUtilisateurs);

@@ -1,13 +1,15 @@
 const db = require("../../configs/db").getDb();
 const Commande = db.collection("commandes");
-const ObjectID = db.ObjectID;
 const userServ = require("./user.service");
-const help = require("./../utils/helper")
+const help = require("./../utils/helper");
+const { ObjectId } = require("mongodb");
 
 async function insertCommande(req){
-    let commande = req.body.commande;
+    let commande = req.body;
     commande.status = "Nouvelle";
     commande.date = new Date();
+    commande.idClient = req.currentUser._id;
+    commande.client = req.currentUser.nom;
     await Commande.insert(commande);
 }
 
@@ -20,7 +22,7 @@ async function pretALivrer(id){
     let commande = await getById(id);
     if(commande.status != "Nouvelle")
         throw new Error("Cette commande ne peut pas être prêt à livrer");
-    await Commande.update({_id: ObjectID(id)}, {$set:{status: "Pret a livrer"}});
+    await Commande.update({_id: ObjectId(id)}, {$set:{status: "Pret a livrer"}});
 }
 
 async function attribuerLivreur(id, idLivreur){
@@ -30,14 +32,14 @@ async function attribuerLivreur(id, idLivreur){
         throw new Error("Le livreur n'existe pas")
     if(commande.status != "Pret a livrer")
         throw new Error("Cette commande n'est pas encore prêt à livrer");
-    await Commande.update({_id: ObjectID(id)}, {$set:{status: "Livraison", idLivreur: idLivreur}});
+    await Commande.update({_id: ObjectId(id)}, {$set:{status: "Livraison", idLivreur: idLivreur}});
 }
 
 async function livrer(id){
     let commande = await getById(id);
     if(commande.status != "Livraison")
         throw new Error("Cette commande n'est pas encore attribué a un livreur");
-    await Commande.update({_id: ObjectID(id)}, {$set:{status: "Livre", dateLivraison: new Date()}});
+    await Commande.update({_id: ObjectId(id)}, {$set:{status: "Livre", dateLivraison: new Date()}});
 }
 
 async function getCommandeALivrer(idLivreur){
@@ -56,11 +58,12 @@ async function getAllCommande(req){
     let cond = help.getConditionDateCommande(req);
     let user = req.currentUser;
     if(user.type == "Client")
-        cond.idClient = user.id;
+        cond.idClient = ObjectId(user._id);
     else if(user.type == "Livreur")
-        cond.idLivreur = user.id;
+        cond.idLivreur =  ObjectId(user._id);
     else if(user.type == "Restaurant")
-        cond.idRestaurant = user.idRestaurant;
+        cond.idRestaurant =  ObjectId(user.idRestaurant);
+        console.log(cond);
     return help.getCollectionPagine(cond, req, Commande);
 }
 

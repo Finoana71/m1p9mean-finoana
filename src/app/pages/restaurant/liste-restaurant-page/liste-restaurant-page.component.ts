@@ -11,8 +11,8 @@ import { isEkaly } from '../../pages-menu';
 export class ListeRestaurantPageComponent implements OnInit {
 
   isEkaly = isEkaly;
-  restos = []
-
+  restos;
+  loading = false;
   constructor(
     private restoServ: RestaurantService,
     private toast: NbToastrService
@@ -27,9 +27,11 @@ export class ListeRestaurantPageComponent implements OnInit {
   }
 
   refreshRestos(){
+    this.loading = true;
     const onSuccess = (res) =>{
       console.log(res)
       this.restos = res.data.data;
+      this.loading = false;
     } 
     this.restoServ.getAll().subscribe(onSuccess, this.onError);
   }

@@ -64,11 +64,25 @@ const getAllLivreurs = async (req, res) =>{
     }
 }
 
+
+const getById = async (req, res) =>{
+    try{
+        let id = req.params.id;
+        let client = await userServ.getById(id);
+        res.send(helper.makeDataApi(client));
+    }
+    catch(err){
+        helper.gererErreur(err, res)
+    }
+}
+
+
 module.exports = {
     inscription,
     connexion,
     activer,
     nouveau,
     getAllUtilisateurs,
-    getAllLivreurs
+    getAllLivreurs,
+    getById
 }

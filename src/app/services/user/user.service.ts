@@ -25,4 +25,8 @@ export class UserService {
     return this.http.get(url);
   }
 
+  getById(id){
+    let url = apiUrl + "/utilisateurs/" + id;
+    return this.http.get(url);
+  }
 }
