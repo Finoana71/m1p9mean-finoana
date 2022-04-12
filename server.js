@@ -82,7 +82,9 @@ dbo.connectToServer(function (err) {
     });
 
     //app.use(express.static('public'));
-    app.listen(PORT);
+    app.listen(PORT, function(){
+
+    });
 
   // start the Express server
 });
