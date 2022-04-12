@@ -5,7 +5,7 @@ const connectionString = "mongodb+srv://finoana:Abcd1234@cluster0.smfgs.mongodb.
 const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  // serverApi: ServerApiVersion.v1 
+  serverApi: ServerApiVersion.v1 
 });
 
 let dbConnection;
