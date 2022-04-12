@@ -53,6 +53,7 @@
     "@swimlane/ngx-charts": "^14.0.0",
     "angular2-chartjs": "0.4.1",
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
     "bootstrap": "4.3.1",
     "chart.js": "2.7.1",
     "ckeditor": "4.7.3",
